@@ -1,7 +1,6 @@
 package Container;
 
 import DB.ConexionMySQL;
-import Internals.check;
 import Internals.reloj;
 import com.digitalpersona.onetouch.DPFPDataPurpose;
 import com.digitalpersona.onetouch.DPFPFeatureSet;
@@ -31,15 +30,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-public class FrmLector extends javax.swing.JFrame {
+public class FrmLectorRegister extends javax.swing.JFrame {
     
     /*Variable para manejar el lector...*/
     private DPFPCapture Lector = DPFPGlobal.getCaptureFactory().createCapture();
@@ -57,7 +54,7 @@ public class FrmLector extends javax.swing.JFrame {
     private DPFPTemplate template;
     public static String TEMPLATE_PROPERTY = "template";
 
-    public FrmLector() {
+    public FrmLectorRegister() {
         initComponents();
         reloj obj = new reloj(lblHora);
         obj.start();
@@ -119,7 +116,7 @@ public class FrmLector extends javax.swing.JFrame {
                             identificarHuella();
                             Reclutador.clear();
                         }catch(IOException ex){
-                            Logger.getLogger(FrmLector.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(FrmLectorRegister.class.getName()).log(Level.SEVERE, null, ex);
                         }finally{
                             lblImagenHuella.setIcon(null);
                         }
@@ -171,12 +168,12 @@ public class FrmLector extends javax.swing.JFrame {
     }
 
     public void start(){
-        Lector.startCapture();
+//        Lector.startCapture();
         EnviarTexto("Fingerprint reader is being used");
     }
 
     public void stop(){
-        Lector.stopCapture();
+//        Lector.stopCapture();
         EnviarTexto("Fingerprint reader is not being used");
     } 
 
@@ -226,7 +223,7 @@ public class FrmLector extends javax.swing.JFrame {
                         stop();
                         EstadoHuellas();
                         setTemplate(null);
-                        JOptionPane.showMessageDialog(FrmLector.this, "The fingerprint cannot been created", "CheckMeIn - Fingerprint Template System", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(FrmLectorRegister.this, "The fingerprint cannot been created", "CheckMeIn - Fingerprint Template System", JOptionPane.ERROR_MESSAGE);
                         start();
                     break;
                 }
@@ -280,18 +277,6 @@ public class FrmLector extends javax.swing.JFrame {
     }
     
     public void registrarAsistencia(){
-        
-        
-//         check check = new check();
-//        List employee = check.searchEmployee("aiden.hughes71@example.com");
-//
-//        if (!employee.isEmpty()) {
-//            HashMap employ = (HashMap) employee.get(0);
-//            int id = (int) employ.get("id");
-//            System.out.println(employ);
-//            check.checkinOut(id);
-//        }
-        
         //Variables de conexion..
         ConexionMySQL mysql = new ConexionMySQL();
         Connection con = mysql.Conectar();
@@ -322,9 +307,6 @@ public class FrmLector extends javax.swing.JFrame {
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, ex);
         }
-        
-       
-        
                 
     }
         
@@ -424,8 +406,8 @@ public class FrmLector extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Iniciar();
-	start();
+//        Iniciar();
+//	start();
         //EstadoHuellas();
     }//GEN-LAST:event_formWindowOpened
 
@@ -449,20 +431,21 @@ public class FrmLector extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmLector.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmLector.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmLector.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmLector.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmLector().setVisible(true);
+                new FrmLectorRegister().setVisible(true);
             }
         });
     }
