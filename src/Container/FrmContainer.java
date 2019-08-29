@@ -2,11 +2,11 @@ package Container;
 
 import About.FrmAbout;
 import Internals.check;
+import Logging.OdooXmlRpc;
 import java.awt.Image;
-import java.util.List;
 import java.awt.Toolkit;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 public class FrmContainer extends javax.swing.JFrame {
 
@@ -236,20 +236,59 @@ public class FrmContainer extends javax.swing.JFrame {
         FrmAlter obj = new FrmAlter();
         obj.setVisible(true);
         this.setVisible(false);
-
-        check check = new check();
-//        List employee = check.searchEmployee("aiden.hughes71@example.com");
+        
+        
+//         OdooXmlRpc odoo = new OdooXmlRpc();
+//        odoo.login("http://localhost:8071", "odoo", "info@example.com", "aaa");
+//        odoo.listRecords("hr.employee");
+//        odoo.dumpRequest();
+//        check check = new check();
+//        List employee = check.searchEmployee("aiden.hughes71@example.com");       
 //
+//     
 //        if (!employee.isEmpty()) {
 //            HashMap emp = (HashMap) employee.get(0);
 //            int id = (int) emp.get("id");
 //            System.out.println(emp);
-//            check.checkinOut(id);
+//            System.out.println(check.searchEmployee("aiden.hughes71@example.com"));
 //        }
-
-//        odoo.dumpRequest();
 //        List employees = check.AllEmployee();
 //        System.out.println(employees);
+        
+        
+//        ConexionMySQL mysql = new ConexionMySQL();
+//        Connection con = mysql.Conectar();
+//
+//        try {
+//            //Obtiene todas las huellas de la bd
+//            PreparedStatement identificarStmt = con.prepareStatement("SELECT huenombre,huehuella FROM huellas");
+//            ResultSet rs = identificarStmt.executeQuery();
+//
+//            //Si se encuentra el nombre en la base de datos
+//            while (rs.next()) {
+//
+////                Blob blob = rs.getBlob("huehuella");
+////                System.out.println("Read " + blob.length() + " bytes ");
+////                byte[] array = blob.getBytes(1, (int) blob.length());
+//
+////                File file = File.createTempFile(rs.getString("huenombre")+"-", ".binary", new File("."));
+////                try (FileOutputStream out = new FileOutputStream(file)) {
+////                    out.write(array);
+////                }
+//
+////                java.sql.Blob ablob = rs.getBlob("huehuella");
+//                //Lee la plantilla de la base de datos
+//                System.err.println(rs.getString("huenombre"));
+//            }
+//
+//            //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
+////            JOptionPane.showMessageDialog(null, "There is no record that matches the fingerprint", "Error", JOptionPane.ERROR_MESSAGE);
+//        } catch (SQLException e) {
+//            //Si ocurre un error lo indica en la consola
+//            //System.err.println("Error al identificar huella dactilar."+e.getMessage());
+//            JOptionPane.showMessageDialog(null, "Failed to identify the fingerprint" + e);
+//        }
+//       
 
     }//GEN-LAST:event_btnAlternativoActionPerformed
 
@@ -268,9 +307,29 @@ public class FrmContainer extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        FrmLectorRegister obj = new FrmLectorRegister();
-        obj.setVisible(true);
-        this.setVisible(false);
+
+        int action;
+        String badgeId = "";
+        check check = new check();
+        do {
+            JPasswordField badge = new JPasswordField(10);
+            action = JOptionPane.showConfirmDialog(null, badge, "Enter Badge ID", JOptionPane.OK_CANCEL_OPTION);
+            System.out.println(action);
+            if (action < 0) {
+                JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
+            } else {
+                badgeId = new String(badge.getPassword());
+                Integer id = check.searchEmployeeByBadgeId(badgeId);
+                Boolean hasTag = check.hasTag(id, "Fingerprint");
+
+                if (hasTag) {
+                    FrmLectorRegister obj = new FrmLectorRegister();
+                    obj.setVisible(true);
+                    this.setVisible(false);
+                    action = 2;
+                }
+            }
+        } while ((!badgeId.equals("0") &&  action != 2));
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     public static void main(String args[]) {
@@ -303,7 +362,7 @@ public class FrmContainer extends javax.swing.JFrame {
                 try {
                     Thread.sleep(1500);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Oops! Algo salió mal " + ex);
+                    JOptionPane.showMessageDialog(null, "Oops! Something wrong happended " + ex);
                 }
                 new FrmContainer().setVisible(true);
             }

@@ -2,123 +2,113 @@ package Container;
 
 import Internals.reloj;
 import DB.ConexionMySQL;
+import Internals.check;
+import Utils.Util;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 public class FrmAlter extends javax.swing.JFrame {
+
+    String numberString = "";
 
     public FrmAlter() {
         initComponents();
         this.setLocationRelativeTo(null);
         reloj obj = new reloj(lblHora);
         obj.start();
+
+        ButtonListener listener = new ButtonListener();
+
+        b0.addActionListener(listener);
+        b1.addActionListener(listener);
+        b2.addActionListener(listener);
+        b3.addActionListener(listener);
+        b4.addActionListener(listener);
+        b5.addActionListener(listener);
+        b6.addActionListener(listener);
+        b7.addActionListener(listener);
+        b8.addActionListener(listener);
+        b9.addActionListener(listener);
+
+    }
+
+    class ButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == b1) {
+                System.out.println(b1.getText());
+                numberString += "1";
+                pssPass.setText(numberString);
+            } else if (e.getSource() == b2) {
+                System.out.println(b2.getText());
+                numberString += "2";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b3) {
+                System.out.println(b3.getText());
+                numberString += "3";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b3) {
+                System.out.println(b3.getText());
+                numberString += "3";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b4) {
+                System.out.println(b4.getText());
+                numberString += "4";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b5) {
+                System.out.println(b5.getText());
+                numberString += "5";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b6) {
+                System.out.println(b6.getText());
+                numberString += "6";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b7) {
+                System.out.println(b7.getText());
+                numberString += "7";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b8) {
+                System.out.println(b8.getText());
+                numberString += "8";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b9) {
+                System.out.println(b9.getText());
+                numberString += "9";
+                pssPass.setText(numberString);
+            }
+            else if (e.getSource() == b0) {
+                System.out.println(b0.getText());
+                numberString += "0";
+                pssPass.setText(numberString);
+            }
+        }
+
     }
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Resources/icon.png"));
         return retValue;
-    }
-
-    //Validar Contrasena y usuario...
-    public boolean validarContra(String name, String pass) {
-
-        String qSql = "SELECT strUsername, pssPassword "
-                + "FROM tblemployee "
-                + "WHERE strUsername ='" + name + "' AND pssPassword ='" + pass + "'";
-
-        int cont = 0;
-
-        //Conexion a la base de datos...
-        ConexionMySQL mysql = new ConexionMySQL();
-        Connection con = mysql.Conectar();
-
-        try {
-            Statement st = con.createStatement();
-            //Objeto que contiene los resultado de la busqueda...
-            ResultSet rs = st.executeQuery(qSql);
-
-            while (rs.next()) {
-                cont = cont + 1;
-            }
-
-        } catch (SQLException ex) {
-            //   JOptionPane.showMessageDialog(null, ex);
-        }
-
-        if (cont == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private Integer obtenerNombre(String emp) {
-        int nombre = 0;
-
-        //Variables de conexion..
-        ConexionMySQL mysql = new ConexionMySQL();
-        Connection con = mysql.Conectar();
-
-        String qSql = "SELECT (idEmployee) AS ID "
-                + "FROM tblemployee "
-                + "WHERE strUsername ='" + emp + "'";
-
-        try {
-            PreparedStatement identificarStmt = con.prepareStatement(qSql);
-            ResultSet rs = identificarStmt.executeQuery();
-
-            //Si se encuentra el nombre en la base de datos
-            while (rs.next()) {
-                nombre = rs.getInt("ID");
-            }
-
-        } catch (Exception ex) {
-            //JOptionPane.showMessageDialog(null,ex);
-        }
-
-        return nombre;
-    }
-
-    public void registrarAsistencia() {
-        //Variables de conexion..
-        ConexionMySQL mysql = new ConexionMySQL();
-        Connection con = mysql.Conectar();
-
-        //Variables
-        String qSql;
-        int nd, emple;
-
-        emple = obtenerNombre(txtUser.getText());
-
-        qSql = "INSERT INTO tblattendance(idEmployee, dteDate, tmeTime)"
-                + " VALUES(?,current_date(),current_time())";
-
-        String men = "Recorded Attendance";
-
-        try {
-            //Preparamos la consulta...
-            PreparedStatement pst = con.prepareStatement(qSql);
-
-            //Insertamos el valor en los campos de la base de datos...
-            pst.setInt(1, emple);
-
-            nd = pst.executeUpdate();
-
-            if (nd > 0) {
-                JOptionPane.showMessageDialog(null, men, "Time Attendance Checker", 1);
-
-            }
-
-        } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, ex);
-        }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -127,14 +117,28 @@ public class FrmAlter extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnAceptar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
         pssPass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
+        numberPanel = new javax.swing.JPanel();
+        b1 = new javax.swing.JButton();
+        b3 = new javax.swing.JButton();
+        b2 = new javax.swing.JButton();
+        b4 = new javax.swing.JButton();
+        b5 = new javax.swing.JButton();
+        b6 = new javax.swing.JButton();
+        b7 = new javax.swing.JButton();
+        b8 = new javax.swing.JButton();
+        b9 = new javax.swing.JButton();
+        b0 = new javax.swing.JButton();
+        btnAceptar1 = new javax.swing.JButton();
+        employeeName = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
+        lblWorkingHour = new javax.swing.JLabel();
+        lblHora2 = new javax.swing.JLabel();
+        lblHora3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CheckMeIn - Username & Password");
@@ -155,43 +159,18 @@ public class FrmAlter extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(20, 20, 166, 48);
 
-        btnAceptar.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
-        btnAceptar.setText("Check");
-        btnAceptar.setBorder(null);
-        btnAceptar.setBorderPainted(false);
-        btnAceptar.setContentAreaFilled(false);
-        btnAceptar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAceptar);
-        btnAceptar.setBounds(300, 250, 79, 29);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel3.setText("User:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(160, 170, 38, 25);
-
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel4.setText("Password:");
+        jLabel4.setText("Badge ID");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(160, 210, 75, 25);
-
-        txtUser.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jPanel1.add(txtUser);
-        txtUser.setBounds(250, 170, 130, 31);
+        jLabel4.setBounds(220, 210, 69, 25);
 
         pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jPanel1.add(pssPass);
-        pssPass.setBounds(250, 210, 130, 31);
+        pssPass.setBounds(330, 210, 200, 31);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 150, 128, 128);
+        jLabel5.setBounds(60, 140, 128, 128);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel2.setText("Time Attendance Checker");
@@ -201,45 +180,312 @@ public class FrmAlter extends javax.swing.JFrame {
         lblHora.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel1.add(lblHora);
-        lblHora.setBounds(300, 30, 80, 30);
+        lblHora.setBounds(300, 40, 80, 30);
+
+        numberPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        b1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b1.setForeground(new java.awt.Color(255, 255, 255));
+        b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b1.setText("1");
+        b1.setBorder(null);
+        b1.setBorderPainted(false);
+        b1.setContentAreaFilled(false);
+        b1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b3.setForeground(new java.awt.Color(255, 255, 255));
+        b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b3.setText("3");
+        b3.setBorder(null);
+        b3.setBorderPainted(false);
+        b3.setContentAreaFilled(false);
+        b3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b2.setForeground(new java.awt.Color(255, 255, 255));
+        b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b2.setText("2");
+        b2.setBorder(null);
+        b2.setBorderPainted(false);
+        b2.setContentAreaFilled(false);
+        b2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b4.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b4.setForeground(new java.awt.Color(255, 255, 255));
+        b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b4.setText("4");
+        b4.setBorder(null);
+        b4.setBorderPainted(false);
+        b4.setContentAreaFilled(false);
+        b4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b5.setForeground(new java.awt.Color(255, 255, 255));
+        b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b5.setText("5");
+        b5.setBorder(null);
+        b5.setBorderPainted(false);
+        b5.setContentAreaFilled(false);
+        b5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b6.setForeground(new java.awt.Color(255, 255, 255));
+        b6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b6.setText("6");
+        b6.setBorder(null);
+        b6.setBorderPainted(false);
+        b6.setContentAreaFilled(false);
+        b6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b7.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b7.setForeground(new java.awt.Color(255, 255, 255));
+        b7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b7.setText("7");
+        b7.setBorder(null);
+        b7.setBorderPainted(false);
+        b7.setContentAreaFilled(false);
+        b7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b8.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b8.setForeground(new java.awt.Color(255, 255, 255));
+        b8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b8.setText("8");
+        b8.setBorder(null);
+        b8.setBorderPainted(false);
+        b8.setContentAreaFilled(false);
+        b8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b9.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b9.setForeground(new java.awt.Color(255, 255, 255));
+        b9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b9.setText("9");
+        b9.setBorder(null);
+        b9.setBorderPainted(false);
+        b9.setContentAreaFilled(false);
+        b9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        b0.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        b0.setForeground(new java.awt.Color(255, 255, 255));
+        b0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        b0.setText("0");
+        b0.setBorder(null);
+        b0.setBorderPainted(false);
+        b0.setContentAreaFilled(false);
+        b0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout numberPanelLayout = new javax.swing.GroupLayout(numberPanel);
+        numberPanel.setLayout(numberPanelLayout);
+        numberPanelLayout.setHorizontalGroup(
+            numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(numberPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(numberPanelLayout.createSequentialGroup()
+                        .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(numberPanelLayout.createSequentialGroup()
+                                .addComponent(b4)
+                                .addGap(18, 18, 18)
+                                .addComponent(b5))
+                            .addGroup(numberPanelLayout.createSequentialGroup()
+                                .addComponent(b1)
+                                .addGap(18, 18, 18)
+                                .addComponent(b2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(numberPanelLayout.createSequentialGroup()
+                        .addComponent(b7)
+                        .addGap(18, 18, 18)
+                        .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(numberPanelLayout.createSequentialGroup()
+                                .addComponent(b0)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(numberPanelLayout.createSequentialGroup()
+                                .addComponent(b8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(b9)))))
+                .addContainerGap())
+        );
+        numberPanelLayout.setVerticalGroup(
+            numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(numberPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b1)
+                    .addComponent(b3)
+                    .addComponent(b2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b6)
+                    .addComponent(b5)
+                    .addComponent(b4))
+                .addGap(6, 6, 6)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b7)
+                    .addComponent(b8)
+                    .addComponent(b9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(b0)
+                .addGap(30, 30, 30))
+        );
+
+        jPanel1.add(numberPanel);
+        numberPanel.setBounds(230, 250, 300, 170);
+
+        btnAceptar1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        btnAceptar1.setText("Check");
+        btnAceptar1.setBorder(null);
+        btnAceptar1.setBorderPainted(false);
+        btnAceptar1.setContentAreaFilled(false);
+        btnAceptar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAceptar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAceptar1);
+        btnAceptar1.setBounds(420, 450, 79, 29);
+
+        employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(employeeName);
+        employeeName.setBounds(160, 130, 450, 60);
+
+        btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        btnClear.setText("Clear");
+        btnClear.setBorder(null);
+        btnClear.setBorderPainted(false);
+        btnClear.setContentAreaFilled(false);
+        btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearbtnAceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClear);
+        btnClear.setBounds(280, 450, 79, 29);
+
+        lblWorkingHour.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblWorkingHour.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblWorkingHour);
+        lblWorkingHour.setBounds(400, 20, 240, 80);
+
+        lblHora2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblHora2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(lblHora2);
+        lblHora2.setBounds(300, 30, 80, 30);
+
+        lblHora3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblHora3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(lblHora3);
+        lblHora3.setBounds(300, 30, 80, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
-        String user = txtUser.getText();
-        String pass = pssPass.getText();
-
-        if(validarContra(user,pass) == true){
-            registrarAsistencia();
-            txtUser.setText("");
-            pssPass.setText("");
-            txtUser.requestFocus();
-        }else if(validarContra(user,pass) == false){
-            JOptionPane.showMessageDialog(null, "The username or password are not correct");
-            txtUser.setText("");
-            pssPass.setText("");
-            txtUser.requestFocus();
-        }
-
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         FrmContainer obj = new FrmContainer();
         obj.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        check check = new check();
+        String badgeId = new String(pssPass.getPassword());
+        Integer id = check.searchEmployeeByBadgeId(badgeId);
+        Boolean hasTag = check.hasTag(id, "Manual Assistance");
+        System.out.println(badgeId);
+
+        if (id != 0) {
+            if (hasTag) {
+                Map attendance = check.checkinOut(id);
+                System.out.println(attendance);
+
+                Integer idEmployee = (int) attendance.get("employee_id");
+                List employee = check.searchEmployeeById(idEmployee);
+
+                if (!employee.isEmpty()) {
+                    HashMap emp = (HashMap) employee.get(0);
+                    String name = (String) emp.get("name");
+                    employeeName.setText(name);
+                    System.out.println(name);
+                    if (attendance.containsKey("check_out")) {
+
+                        String checkIn = (String) attendance.get("check_in");
+                        String checkOut = (String) attendance.get("check_out");
+
+                        String calculateWorkedTime = Util.DifferenceBetweenDates(checkIn, checkOut);
+
+                        sendHour(calculateWorkedTime, 0);
+
+                        sendTextInOut(name, 0);
+                    } else {
+                        String checkIn = (String) attendance.get("check_in");
+                        sendHour(checkIn, 1);
+                        sendTextInOut(name, 1);
+                    }
+
+                }
+                pssPass.setText(null);
+                numberString = "";
+
+            } else {
+                JOptionPane.showMessageDialog(null, "You can't do this operation");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "The Badge ID was not found");
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    public void sendHour(String string, Integer status) {
+        lblWorkingHour.setForeground(Color.orange);
+        lblWorkingHour.setFont(new java.awt.Font("Tahoma", 0, 40));
+        lblWorkingHour.setText(string);
+        if (status == 1) {
+            lblWorkingHour.setForeground(Color.GREEN);
+            lblWorkingHour.setFont(new java.awt.Font("Tahoma", 0, 20));
+            lblWorkingHour.setText(string);
+        }
+    }
+
+    /**
+     * Allo to send text to label
+     *
+     * @param string
+     * @param status
+     */
+    public void sendTextInOut(String string, Integer status) {
+        employeeName.setForeground(Color.orange);
+        employeeName.setText(string);
+        if (status == 1) {
+            employeeName.setForeground(Color.GREEN);
+            employeeName.setText(string);
+        }
+    }
+
+
+    private void btnClearbtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearbtnAceptarActionPerformed
+        // TODO add your handling code here:
+        pssPass.setText(null);
+        numberString = "";
+    }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows look and feel */
@@ -255,13 +501,17 @@ public class FrmAlter extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAlter.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAlter.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAlter.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmAlter.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -273,15 +523,29 @@ public class FrmAlter extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton b0;
+    private javax.swing.JButton b1;
+    private javax.swing.JButton b2;
+    private javax.swing.JButton b3;
+    private javax.swing.JButton b4;
+    private javax.swing.JButton b5;
+    private javax.swing.JButton b6;
+    private javax.swing.JButton b7;
+    private javax.swing.JButton b8;
+    private javax.swing.JButton b9;
+    private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblHora2;
+    private javax.swing.JLabel lblHora3;
+    private javax.swing.JLabel lblWorkingHour;
+    private javax.swing.JPanel numberPanel;
     private javax.swing.JPasswordField pssPass;
-    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,10 +11,10 @@ public class ConexionMySQL {
     public String pass;
 
     public ConexionMySQL() {
-        this.db = "checkmein";
+        this.db = "huellas";
         this.url = "jdbc:mysql://localhost/"+db;
-        this.user = "rootuser";
-        this.pass = "root";
+        this.user = "admin";
+        this.pass = "aaa";
     }
     
     //Creamos un metodo que devuelve un valor de tipo Connection para crear la conexión...

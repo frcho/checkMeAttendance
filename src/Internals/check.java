@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Internals;
 
 import Logging.OdooXmlRpc;
+import Utils.Util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import static java.util.Arrays.asList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,48 +18,121 @@ import java.util.TimeZone;
  */
 public class check {
 
+    /**
+     * Method to create connection with odoo api.
+     *
+     * @return boolean
+     */
     public OdooXmlRpc connection() {
         OdooXmlRpc odoo = new OdooXmlRpc();
         odoo.login("http://localhost:8071", "odoo", "info@uva3.com", "aaa");
         return odoo;
     }
 
-    public Integer checkinOut(int employeeId) {
+    /**
+     * Method that allow to do check in/out
+     *
+     * @param employeeId
+     * @return Map
+     */
+    public Map checkinOut(int employeeId) {
 
         OdooXmlRpc odoo = this.connection();
 
-        List AllFilters = new ArrayList<>();
-        AllFilters.add(asList("employee_id", "=", employeeId));
-        AllFilters.add(asList("check_out", "=", false));
-
-        List attendanceResult = odoo.getRecords("hr.attendance", asList("id", "check_in", "check_out"), AllFilters);
-
+//        List AllFilters = new ArrayList<>();
+//        AllFilters.add(asList("employee_id", "=", employeeId));
+//        AllFilters.add(asList("check_out", "=", false));
+//
+//        List attendanceResult = odoo.getRecords("hr.attendance", asList("id", "check_in", "check_out"), AllFilters);
+        List attendanceResult = attendanceList(employeeId);
         if (!attendanceResult.isEmpty()) {
             System.out.println("Realizando el checkout");
             System.out.println(attendanceResult);
             HashMap attendance = (HashMap) attendanceResult.get(0);
             int attendanceId = (int) attendance.get("id");
+            String checkIn = (String) attendance.get("check_in");
 
-            Map data = new HashMap();
+            Map checkInOut = new HashMap();
             //Adding elements to map  
-            data.put("check_out", this.dateTime());
-            odoo.updateRecord("hr.attendance", data, attendanceId);
+            checkInOut.put("check_out", Util.dateFormatTocheck());
+            //Send Map to updateRecord to regist checkOut time
+            odoo.updateRecord("hr.attendance", checkInOut, attendanceId);
+            // Add employee id
+            checkInOut.put("employee_id", employeeId);
+            //Add checkIn to map by calculate the time to show by the user
+            checkInOut.put("check_in", checkIn);
             System.out.println("Checkout Realizado.");
 
+            return checkInOut;
         } else {
-            Map checking = new HashMap();
+            Map checkInOut = new HashMap();
             //Adding elements to map  
-            checking.put("employee_id", employeeId);
-            checking.put("check_in", this.dateTime());
-            Integer idAttendace = odoo.createRecord("hr.attendance", checking);
+            checkInOut.put("employee_id", employeeId);
+            checkInOut.put("check_in", Util.dateFormatTocheck());
+            Integer idAttendace = odoo.createRecord("hr.attendance", checkInOut);
             System.out.println(idAttendace);
-            return idAttendace;
+            return checkInOut;
+        }
+    }
+
+    /**
+     * List with every regist of employee
+     *
+     * @param employeeId
+     * @return
+     */
+    public List attendanceList(int employeeId) {
+
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("employee_id", "=", employeeId));
+        AllFilters.add(asList("check_out", "=", false));
+        OdooXmlRpc odoo = this.connection();
+        List attendanceResult = odoo.getRecords("hr.attendance", asList("id", "check_in", "check_out"), AllFilters);
+
+        return attendanceResult;
+    }
+
+    /**
+     * Method to allow search employees using a email and badge
+     *
+     * @param badge
+     * @return List
+     */
+    public Integer searchEmployeeByBadgeId(String badge) {
+        OdooXmlRpc odoo = this.connection();
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("barcode", "=", badge));
+
+        List employee = odoo.getRecords("hr.employee",
+                asList("id"), AllFilters);
+
+        if (!employee.isEmpty()) {
+            HashMap emp = (HashMap) employee.get(0);
+            int id = (int) emp.get("id");
+            return id;
         }
 
         return 0;
-
     }
 
+    public List searchEmployeeById(Integer id) {
+        OdooXmlRpc odoo = this.connection();
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("id", "=", id));
+
+        List employee = odoo.getRecords("hr.employee",
+                asList("id", "name", "work_email"), AllFilters);
+
+
+        return employee;
+    }
+
+    /**
+     * Method to allow search employees using a email
+     *
+     * @param email
+     * @return List
+     */
     public List searchEmployee(String email) {
         OdooXmlRpc odoo = this.connection();
 //                odoo.listRecords("hr.attendance");
@@ -79,11 +146,28 @@ public class check {
         AllFilters.add(asList("work_email", "=", email));
 
         List employee = odoo.getRecords("hr.employee",
-                asList("id", "name", "work_email"), AllFilters);
+                asList("id", "name", "work_email", "x_fingerprint"), AllFilters);
 
         return employee;
     }
-    public List AllEmployee() {
+
+    /**
+     * Method to update fingerprint by employed
+     *
+     * @param id
+     * @param data
+     */
+    public void addFingerprintToEmployee(Integer id, Map data) {
+        OdooXmlRpc odoo = this.connection();
+        odoo.updateRecord("hr.employee", data, id);
+    }
+
+    /**
+     * List employes actives
+     *
+     * @return List
+     */
+    public List allEmployee() {
         OdooXmlRpc odoo = this.connection();
 //                odoo.listRecords("hr.attendance");
 //                odoo.dumpRequest();
@@ -96,23 +180,55 @@ public class check {
         AllFilters.add(asList("active", "=", true));
 
         List employees = odoo.getRecords("hr.employee",
-                asList("id", "name", "work_email"), AllFilters);
+                asList("id", "name", "work_email", "category_ids", "x_fingerprint"), AllFilters);
 
         return employees;
     }
 
-    public String dateTime() {
+    /**
+     * Method that return a boolean true if the user has the tag send in
+     * variable tag
+     *
+     * @param id employee id
+     * @param tag String with the name of tag case sensitive
+     * @return List
+     */
+    public Boolean hasTag(int id, String tag) {
+        OdooXmlRpc odoo = this.connection();
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("employee_ids", "=", id));
 
-        Date dat = new Date();
-        java.sql.Date date = new java.sql.Date(dat.getTime());
-        DateFormat dateFormat = null;
+        List categories = odoo.getRecords("hr.employee.category",
+                asList("id", "display_name"), AllFilters);
 
-        dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        int i = 0;
+        while (i < categories.size()) {
+            HashMap cat = (HashMap) categories.get(i);
+            String categorieName = (String) cat.get("display_name");
+            if (categorieName.matches(tag)) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
 
-        String DateUTC = dateFormat.format(date);
-        return DateUTC;
+    /**
+     * List employes actives with fingerprint registered
+     *
+     * @return List
+     */
+    public List allEmployeeWithFingerPrint() {
+        OdooXmlRpc odoo = this.connection();
 
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("active", "=", true));
+        AllFilters.add(asList("x_fingerprint", "!=", false));
+
+        List employees = odoo.getRecords("hr.employee",
+                asList("id", "name", "work_email", "x_fingerprint"), AllFilters);
+
+        return employees;
     }
 
 }
