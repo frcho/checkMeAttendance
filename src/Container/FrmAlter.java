@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class FrmAlter extends javax.swing.JFrame {
@@ -139,6 +141,7 @@ public class FrmAlter extends javax.swing.JFrame {
         lblWorkingHour = new javax.swing.JLabel();
         lblHora2 = new javax.swing.JLabel();
         lblHora3 = new javax.swing.JLabel();
+        btnChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CheckMeIn - Username & Password");
@@ -162,11 +165,11 @@ public class FrmAlter extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Badge ID");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(220, 210, 69, 25);
+        jLabel4.setBounds(250, 210, 69, 25);
 
         pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jPanel1.add(pssPass);
-        pssPass.setBounds(330, 210, 200, 31);
+        pssPass.setBounds(340, 210, 180, 31);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
@@ -280,33 +283,27 @@ public class FrmAlter extends javax.swing.JFrame {
             numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(numberPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(numberPanelLayout.createSequentialGroup()
-                        .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(numberPanelLayout.createSequentialGroup()
-                                .addComponent(b4)
-                                .addGap(18, 18, 18)
-                                .addComponent(b5))
-                            .addGroup(numberPanelLayout.createSequentialGroup()
-                                .addComponent(b1)
-                                .addGap(18, 18, 18)
-                                .addComponent(b2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(b1)
+                        .addGap(18, 18, 18)
+                        .addComponent(b2))
+                    .addGroup(numberPanelLayout.createSequentialGroup()
+                        .addComponent(b4)
+                        .addGap(18, 18, 18)
+                        .addComponent(b5))
                     .addGroup(numberPanelLayout.createSequentialGroup()
                         .addComponent(b7)
                         .addGap(18, 18, 18)
                         .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(numberPanelLayout.createSequentialGroup()
-                                .addComponent(b0)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(numberPanelLayout.createSequentialGroup()
-                                .addComponent(b8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(b9)))))
-                .addContainerGap())
+                            .addComponent(b0)
+                            .addComponent(b8))))
+                .addGap(18, 18, 18)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         numberPanelLayout.setVerticalGroup(
             numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,23 +313,23 @@ public class FrmAlter extends javax.swing.JFrame {
                     .addComponent(b1)
                     .addComponent(b3)
                     .addComponent(b2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b6)
                     .addComponent(b5)
                     .addComponent(b4))
-                .addGap(6, 6, 6)
+                .addGap(18, 18, 18)
                 .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b7)
                     .addComponent(b8)
                     .addComponent(b9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(b0)
-                .addGap(30, 30, 30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(numberPanel);
-        numberPanel.setBounds(230, 250, 300, 170);
+        numberPanel.setBounds(230, 250, 310, 180);
 
         btnAceptar1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -348,7 +345,7 @@ public class FrmAlter extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAceptar1);
-        btnAceptar1.setBounds(420, 450, 79, 29);
+        btnAceptar1.setBounds(430, 450, 79, 29);
 
         employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -357,7 +354,7 @@ public class FrmAlter extends javax.swing.JFrame {
 
         btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton2.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setBorder(null);
         btnClear.setBorderPainted(false);
@@ -369,7 +366,7 @@ public class FrmAlter extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnClear);
-        btnClear.setBounds(280, 450, 79, 29);
+        btnClear.setBounds(270, 450, 79, 29);
 
         lblWorkingHour.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblWorkingHour.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -385,6 +382,22 @@ public class FrmAlter extends javax.swing.JFrame {
         lblHora3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel1.add(lblHora3);
         lblHora3.setBounds(300, 30, 80, 30);
+
+        btnChange.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        btnChange.setForeground(new java.awt.Color(255, 255, 255));
+        btnChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton1.png"))); // NOI18N
+        btnChange.setText("Device Mode");
+        btnChange.setBorder(null);
+        btnChange.setBorderPainted(false);
+        btnChange.setContentAreaFilled(false);
+        btnChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangebtnAceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnChange);
+        btnChange.setBounds(560, 500, 79, 29);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -448,9 +461,13 @@ public class FrmAlter extends javax.swing.JFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null, "You can't do this operation");
+                pssPass.setText(null);
+                numberString = "";
             }
         } else {
             JOptionPane.showMessageDialog(null, "The Badge ID was not found");
+            pssPass.setText(null);
+            numberString = "";
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -486,6 +503,18 @@ public class FrmAlter extends javax.swing.JFrame {
         pssPass.setText(null);
         numberString = "";
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
+
+    private void btnChangebtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangebtnAceptarActionPerformed
+        // TODO add your handling code here:
+        JFrame FrmLector = new FrmLector();
+
+        FrmLector.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        FrmLector.setLocationRelativeTo(null);
+
+        FrmLector.setVisible(true);
+        dispose(); 
+
+    }//GEN-LAST:event_btnChangebtnAceptarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows look and feel */
@@ -534,6 +563,7 @@ public class FrmAlter extends javax.swing.JFrame {
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
     private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnChange;
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
