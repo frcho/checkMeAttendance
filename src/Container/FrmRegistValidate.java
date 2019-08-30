@@ -82,6 +82,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
                 numberString += "0";
                 pssPass.setText(numberString);
             }
+            btnCheck.requestFocus();
         }
 
     }
@@ -113,8 +114,8 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         b8 = new javax.swing.JButton();
         b9 = new javax.swing.JButton();
         b0 = new javax.swing.JButton();
-        btnAceptar1 = new javax.swing.JButton();
-        employeeName = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JButton();
+        message = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
         lblHora2 = new javax.swing.JLabel();
         lblHora3 = new javax.swing.JLabel();
@@ -313,26 +314,26 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         jPanel1.add(numberPanel);
         numberPanel.setBounds(160, 300, 310, 180);
 
-        btnAceptar1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
-        btnAceptar1.setText("Check");
-        btnAceptar1.setBorder(null);
-        btnAceptar1.setBorderPainted(false);
-        btnAceptar1.setContentAreaFilled(false);
-        btnAceptar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAceptar1.addActionListener(new java.awt.event.ActionListener() {
+        btnCheck.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        btnCheck.setForeground(new java.awt.Color(255, 255, 255));
+        btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        btnCheck.setText("Check");
+        btnCheck.setBorder(null);
+        btnCheck.setBorderPainted(false);
+        btnCheck.setContentAreaFilled(false);
+        btnCheck.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
+                btnCheckActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar1);
-        btnAceptar1.setBounds(360, 500, 79, 29);
+        jPanel1.add(btnCheck);
+        btnCheck.setBounds(360, 500, 79, 29);
 
-        employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
-        employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(employeeName);
-        employeeName.setBounds(140, 190, 360, 40);
+        message.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(message);
+        message.setBounds(140, 190, 360, 40);
 
         btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -379,12 +380,12 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
 
         check check = new check();
         String badgeId = new String(pssPass.getPassword());
         Integer id = check.searchEmployeeByBadgeId(badgeId);
-        Boolean hasTag = check.hasTag(id, "Fingerprint");
+        Boolean hasTag = check.hasTag(id, "Fingerprint Register");
         System.out.println(badgeId);
 
         if (!badgeId.isEmpty()) {
@@ -396,7 +397,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
                     pssPass.setText(null);
                     numberString = "";
                 } else {
-                    sendText("You can't do this operation", 0);
+                    sendText("You are not allowed", 0);
                     pssPass.setText(null);
                     numberString = "";
                 }
@@ -408,7 +409,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         } else {
             sendText("The Badge ID is Empty", 0);
         }
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    }//GEN-LAST:event_btnCheckActionPerformed
 
     /**
      * Allo to send text to label
@@ -417,9 +418,9 @@ public class FrmRegistValidate extends javax.swing.JFrame {
      * @param status
      */
     public void sendText(String string, Integer status) {
-        employeeName.setForeground(Color.RED);
-        employeeName.setText(string);
-        employeeName.setFont(new java.awt.Font("Tahoma", 0, 25));
+        message.setForeground(Color.RED);
+        message.setText(string);
+        message.setFont(new java.awt.Font("Tahoma", 0, 25));
 
     }
 
@@ -431,7 +432,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
 
     private void pssPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssPassActionPerformed
-        btnAceptarActionPerformed(evt);
+        btnCheckActionPerformed(evt);
     }//GEN-LAST:event_pssPassActionPerformed
 
     public static void main(String args[]) {
@@ -481,9 +482,8 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private javax.swing.JButton b7;
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
-    private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnClear;
-    private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -492,6 +492,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblHora2;
     private javax.swing.JLabel lblHora3;
+    private javax.swing.JLabel message;
     private javax.swing.JPanel numberPanel;
     private javax.swing.JPasswordField pssPass;
     // End of variables declaration//GEN-END:variables
