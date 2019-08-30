@@ -2,23 +2,17 @@ package Container;
 
 import Internals.reloj;
 import Internals.check;
-import Utils.Util;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-public class FrmAlter extends javax.swing.JFrame {
+public class FrmRegistValidate extends javax.swing.JFrame {
 
     String numberString = "";
 
-    public FrmAlter() {
+    public FrmRegistValidate() {
         initComponents();
         this.setLocationRelativeTo(null);
         reloj obj = new reloj(lblHora);
@@ -51,48 +45,39 @@ public class FrmAlter extends javax.swing.JFrame {
                 System.out.println(b2.getText());
                 numberString += "2";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b3) {
+            } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
                 numberString += "3";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b3) {
+            } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
                 numberString += "3";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b4) {
+            } else if (e.getSource() == b4) {
                 System.out.println(b4.getText());
                 numberString += "4";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b5) {
+            } else if (e.getSource() == b5) {
                 System.out.println(b5.getText());
                 numberString += "5";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b6) {
+            } else if (e.getSource() == b6) {
                 System.out.println(b6.getText());
                 numberString += "6";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b7) {
+            } else if (e.getSource() == b7) {
                 System.out.println(b7.getText());
                 numberString += "7";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b8) {
+            } else if (e.getSource() == b8) {
                 System.out.println(b8.getText());
                 numberString += "8";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b9) {
+            } else if (e.getSource() == b9) {
                 System.out.println(b9.getText());
                 numberString += "9";
                 pssPass.setText(numberString);
-            }
-            else if (e.getSource() == b0) {
+            } else if (e.getSource() == b0) {
                 System.out.println(b0.getText());
                 numberString += "0";
                 pssPass.setText(numberString);
@@ -131,13 +116,11 @@ public class FrmAlter extends javax.swing.JFrame {
         btnAceptar1 = new javax.swing.JButton();
         employeeName = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
-        lblWorkingHour = new javax.swing.JLabel();
         lblHora2 = new javax.swing.JLabel();
         lblHora3 = new javax.swing.JLabel();
-        btnChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CheckMeIn - Badge ID");
+        setTitle("CheckMeIn - Validate Access");
         setIconImage(getIconImage());
         setName("frmAlter"); // NOI18N
         setResizable(false);
@@ -159,7 +142,7 @@ public class FrmAlter extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Badge ID");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(250, 210, 69, 25);
+        jLabel4.setBounds(180, 260, 69, 25);
 
         pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         pssPass.addActionListener(new java.awt.event.ActionListener() {
@@ -168,16 +151,16 @@ public class FrmAlter extends javax.swing.JFrame {
             }
         });
         jPanel1.add(pssPass);
-        pssPass.setBounds(340, 210, 180, 31);
+        pssPass.setBounds(270, 260, 180, 31);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(60, 140, 128, 128);
+        jLabel5.setBounds(480, 20, 128, 128);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        jLabel2.setText("Time Attendance Checker");
+        jLabel2.setText("Validate Access");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 70, 260, 32);
+        jLabel2.setBounds(20, 70, 155, 32);
 
         lblHora.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -328,7 +311,7 @@ public class FrmAlter extends javax.swing.JFrame {
         );
 
         jPanel1.add(numberPanel);
-        numberPanel.setBounds(230, 250, 310, 180);
+        numberPanel.setBounds(160, 300, 310, 180);
 
         btnAceptar1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -344,12 +327,12 @@ public class FrmAlter extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAceptar1);
-        btnAceptar1.setBounds(430, 450, 79, 29);
+        btnAceptar1.setBounds(360, 500, 79, 29);
 
         employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(employeeName);
-        employeeName.setBounds(160, 130, 450, 60);
+        employeeName.setBounds(140, 190, 360, 40);
 
         btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -365,12 +348,7 @@ public class FrmAlter extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnClear);
-        btnClear.setBounds(270, 450, 79, 29);
-
-        lblWorkingHour.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblWorkingHour.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(lblWorkingHour);
-        lblWorkingHour.setBounds(400, 20, 240, 80);
+        btnClear.setBounds(200, 500, 79, 29);
 
         lblHora2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblHora2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -382,27 +360,11 @@ public class FrmAlter extends javax.swing.JFrame {
         jPanel1.add(lblHora3);
         lblHora3.setBounds(300, 30, 80, 30);
 
-        btnChange.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        btnChange.setForeground(new java.awt.Color(255, 255, 255));
-        btnChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton1.png"))); // NOI18N
-        btnChange.setText("Device Mode");
-        btnChange.setBorder(null);
-        btnChange.setBorderPainted(false);
-        btnChange.setContentAreaFilled(false);
-        btnChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnChange.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangebtnAceptarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnChange);
-        btnChange.setBounds(560, 500, 79, 29);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,64 +384,31 @@ public class FrmAlter extends javax.swing.JFrame {
         check check = new check();
         String badgeId = new String(pssPass.getPassword());
         Integer id = check.searchEmployeeByBadgeId(badgeId);
-        Boolean hasTag = check.hasTag(id, "Manual Assistance");
+        Boolean hasTag = check.hasTag(id, "Fingerprint");
         System.out.println(badgeId);
 
-        if (id != 0) {
-            if (hasTag) {
-                Map attendance = check.checkinOut(id);
-                System.out.println(attendance);
-
-                Integer idEmployee = (int) attendance.get("employee_id");
-                List employee = check.searchEmployeeById(idEmployee);
-
-                if (!employee.isEmpty()) {
-                    HashMap emp = (HashMap) employee.get(0);
-                    String name = (String) emp.get("name");
-                    employeeName.setText(name);
-                    System.out.println(name);
-                    if (attendance.containsKey("check_out")) {
-
-                        String checkIn = (String) attendance.get("check_in");
-                        String checkOut = (String) attendance.get("check_out");
-
-                        String calculateWorkedTime = Util.DifferenceBetweenDates(checkIn, checkOut);
-
-                        sendHour(calculateWorkedTime, 0);
-
-                        sendTextInOut(name, 0);
-                    } else {
-                        String checkIn = (String) attendance.get("check_in");
-                        sendHour(checkIn, 1);
-                        sendTextInOut(name, 1);
-                    }
-
+        if (!badgeId.isEmpty()) {
+            if (id != 0) {
+                if (hasTag) {
+                    FrmLectorRegister obj = new FrmLectorRegister();
+                    obj.setVisible(true);
+                    this.setVisible(false);
+                    pssPass.setText(null);
+                    numberString = "";
+                } else {
+                    sendText("You can't do this operation", 0);
+                    pssPass.setText(null);
+                    numberString = "";
                 }
-                pssPass.setText(null);
-                numberString = "";
-
             } else {
-                JOptionPane.showMessageDialog(null, "You can't do this operation");
+                sendText("The Badge ID was not found", 0);
                 pssPass.setText(null);
                 numberString = "";
             }
         } else {
-            JOptionPane.showMessageDialog(null, "The Badge ID was not found");
-            pssPass.setText(null);
-            numberString = "";
+            sendText("The Badge ID is Empty", 0);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    public void sendHour(String string, Integer status) {
-        lblWorkingHour.setForeground(Color.orange);
-        lblWorkingHour.setFont(new java.awt.Font("Tahoma", 0, 40));
-        lblWorkingHour.setText(string);
-        if (status == 1) {
-            lblWorkingHour.setForeground(Color.GREEN);
-            lblWorkingHour.setFont(new java.awt.Font("Tahoma", 0, 20));
-            lblWorkingHour.setText(string);
-        }
-    }
 
     /**
      * Allo to send text to label
@@ -487,13 +416,11 @@ public class FrmAlter extends javax.swing.JFrame {
      * @param string
      * @param status
      */
-    public void sendTextInOut(String string, Integer status) {
-        employeeName.setForeground(Color.orange);
+    public void sendText(String string, Integer status) {
+        employeeName.setForeground(Color.RED);
         employeeName.setText(string);
-        if (status == 1) {
-            employeeName.setForeground(Color.GREEN);
-            employeeName.setText(string);
-        }
+        employeeName.setFont(new java.awt.Font("Tahoma", 0, 25));
+
     }
 
 
@@ -502,18 +429,6 @@ public class FrmAlter extends javax.swing.JFrame {
         pssPass.setText(null);
         numberString = "";
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
-
-    private void btnChangebtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangebtnAceptarActionPerformed
-        // TODO add your handling code here:
-        JFrame FrmLector = new FrmLector();
-
-        FrmLector.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        FrmLector.setLocationRelativeTo(null);
-
-        FrmLector.setVisible(true);
-        dispose(); 
-
-    }//GEN-LAST:event_btnChangebtnAceptarActionPerformed
 
     private void pssPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssPassActionPerformed
         btnAceptarActionPerformed(evt);
@@ -533,24 +448,25 @@ public class FrmAlter extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class
+            java.util.logging.Logger.getLogger(FrmRegistValidate.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class
+            java.util.logging.Logger.getLogger(FrmRegistValidate.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class
+            java.util.logging.Logger.getLogger(FrmRegistValidate.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAlter.class
+            java.util.logging.Logger.getLogger(FrmRegistValidate.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAlter().setVisible(true);
+                new FrmRegistValidate().setVisible(true);
             }
         });
     }
@@ -566,7 +482,6 @@ public class FrmAlter extends javax.swing.JFrame {
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
     private javax.swing.JButton btnAceptar1;
-    private javax.swing.JButton btnChange;
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
@@ -577,7 +492,6 @@ public class FrmAlter extends javax.swing.JFrame {
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblHora2;
     private javax.swing.JLabel lblHora3;
-    private javax.swing.JLabel lblWorkingHour;
     private javax.swing.JPanel numberPanel;
     private javax.swing.JPasswordField pssPass;
     // End of variables declaration//GEN-END:variables

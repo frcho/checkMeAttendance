@@ -283,7 +283,7 @@ public class FrmLector extends javax.swing.JFrame {
         } else {
             //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
 //            JOptionPane.showMessageDialog(null, "Something happend with device, Maybe Its broken, Try with other", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
-            EnviarTexto("Something happend with device, Maybe Its broken, Try with other");
+            EnviarTexto("Something happend with device, Maybe Its broken, Try with other device");
             setTemplate(null);
         }
     }
@@ -496,6 +496,7 @@ public class FrmLector extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
+        stop();
         JFrame FrmAlter = new FrmAlter();
 
         FrmAlter.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

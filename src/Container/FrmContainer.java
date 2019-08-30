@@ -5,6 +5,9 @@ import Internals.check;
 import Logging.OdooXmlRpc;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
@@ -27,7 +30,6 @@ public class FrmContainer extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnLector = new javax.swing.JButton();
         btnAlternativo = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -39,11 +41,10 @@ public class FrmContainer extends javax.swing.JFrame {
         mnuInicio2 = new javax.swing.JMenu();
         mnuSalir = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CheckMeIn - Checker");
+        setTitle("CheckMeIn - Register");
         setIconImage(getIconImage());
         setName("frmPrincipal"); // NOI18N
         setResizable(false);
@@ -52,9 +53,6 @@ public class FrmContainer extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         jLabel1.setText("CheckMeIn");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        jLabel2.setText("AddMeIn");
 
         btnLector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/device.png"))); // NOI18N
         btnLector.setToolTipText("Pase de Asistencia con lector biométrico");
@@ -93,7 +91,7 @@ public class FrmContainer extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        jLabel5.setText("Time Attendance Checker");
+        jLabel5.setText("Time Attendance Odoo");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("Add Employee");
@@ -103,41 +101,29 @@ public class FrmContainer extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3)
+                    .addComponent(btnLector))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel1))
+                        .addComponent(btnRegister)
+                        .addGap(103, 103, 103)
+                        .addComponent(btnAlternativo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel6))
-                            .addComponent(btnRegister))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel6)
+                        .addGap(124, 124, 124)
+                        .addComponent(jLabel4)))
+                .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel3)
-                            .addComponent(btnLector))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAlternativo)
-                                .addGap(9, 9, 9))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(200, 200, 200)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(289, 289, 289)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 185, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(205, 205, 205))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,19 +134,19 @@ public class FrmContainer extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAlternativo)
-                    .addComponent(btnLector))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(4, 4, 4)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegister)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAlternativo)
+                            .addComponent(btnLector))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnRegister)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         menuBar2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -185,19 +171,9 @@ public class FrmContainer extends javax.swing.JFrame {
         helpMenu.setText("Ayuda");
         helpMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        contentMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/about-26.png"))); // NOI18N
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("FAQ's");
-        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentMenuItemActionPerformed(evt);
-            }
-        });
-        helpMenu.add(contentMenuItem);
-
         aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/under_computer-26.png"))); // NOI18N
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About CheckMeIn - Checker");
+        aboutMenuItem.setText("About CheckMeIn");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -220,7 +196,7 @@ public class FrmContainer extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -236,8 +212,7 @@ public class FrmContainer extends javax.swing.JFrame {
         FrmAlter obj = new FrmAlter();
         obj.setVisible(true);
         this.setVisible(false);
-        
-        
+
 //         OdooXmlRpc odoo = new OdooXmlRpc();
 //        odoo.login("http://localhost:8071", "odoo", "info@example.com", "aaa");
 //        odoo.listRecords("hr.employee");
@@ -254,8 +229,6 @@ public class FrmContainer extends javax.swing.JFrame {
 //        }
 //        List employees = check.AllEmployee();
 //        System.out.println(employees);
-        
-        
 //        ConexionMySQL mysql = new ConexionMySQL();
 //        Connection con = mysql.Conectar();
 //
@@ -296,10 +269,6 @@ public class FrmContainer extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mnuSalirActionPerformed
 
-    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-
-    }//GEN-LAST:event_contentMenuItemActionPerformed
-
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         FrmAbout obj = new FrmAbout();
         obj.setVisible(true);
@@ -308,28 +277,56 @@ public class FrmContainer extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
 
-        int action;
-        String badgeId = "";
-        check check = new check();
-        do {
-            JPasswordField badge = new JPasswordField(10);
-            action = JOptionPane.showConfirmDialog(null, badge, "Enter Badge ID", JOptionPane.OK_CANCEL_OPTION);
-            System.out.println(action);
-            if (action < 0) {
-                JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
-            } else {
-                badgeId = new String(badge.getPassword());
-                Integer id = check.searchEmployeeByBadgeId(badgeId);
-                Boolean hasTag = check.hasTag(id, "Fingerprint");
+        FrmRegistValidate obj = new FrmRegistValidate();
+        obj.setVisible(true);
+        this.setVisible(false);
+        
+        
+//         check check = new check();
+//
+//        List employeList = check.allEmployee();
+//        List<String> optionList = new ArrayList<>();
+//
+//        int i = 0;
+//        while (i < employeList.size()) {
+//            HashMap emp = (HashMap) employeList.get(i);
+//            String email = (String) emp.get("work_email");
+//            optionList.add(email);
+//            i++;
+//        }
+//
+//        Object[] options = optionList.toArray();
+//        Object selectedEmailEmployee = JOptionPane.showInputDialog(null,
+//                "Choice Employee?",
+//                "Fingerprint",
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                options,
+//                options[0]);
 
-                if (hasTag) {
-                    FrmLectorRegister obj = new FrmLectorRegister();
-                    obj.setVisible(true);
-                    this.setVisible(false);
-                    action = 2;
-                }
-            }
-        } while ((!badgeId.equals("0") &&  action != 2));
+
+//        int action;
+//        String badgeId = "";
+//        check check = new check();
+//        do {
+//            JPasswordField badge = new JPasswordField(10);
+//            action = JOptionPane.showConfirmDialog(null, badge, "Enter Badge ID", JOptionPane.OK_CANCEL_OPTION);
+//            System.out.println(action);
+//            if (action < 0) {
+//                JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
+//            } else {
+//                badgeId = new String(badge.getPassword());
+//                Integer id = check.searchEmployeeByBadgeId(badgeId);
+//                Boolean hasTag = check.hasTag(id, "Fingerprint");
+//
+//                if (hasTag) {
+//                    FrmLectorRegister obj = new FrmLectorRegister();
+//                    obj.setVisible(true);
+//                    this.setVisible(false);
+//                    action = 2;
+//                }
+//            }
+//        } while ((!badgeId.equals("0") &&  action != 2));
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     public static void main(String args[]) {
@@ -373,10 +370,8 @@ public class FrmContainer extends javax.swing.JFrame {
     private javax.swing.JButton btnAlternativo;
     private javax.swing.JButton btnLector;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
