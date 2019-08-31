@@ -7,10 +7,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JTextField;
 
 public class FrmRegistValidate extends javax.swing.JFrame {
 
     String numberString = "";
+    String activeField = "jTextField1";
 
     public FrmRegistValidate() {
         initComponents();
@@ -35,52 +37,62 @@ public class FrmRegistValidate extends javax.swing.JFrame {
 
     class ButtonListener implements ActionListener {
 
+        JTextField field;
+
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            if (activeField.equals("identificationId")) {
+                field = identificationId;
+            }
+            if (activeField.equals("pssPass")) {
+                field = pssPass;
+            }
+
             if (e.getSource() == b1) {
                 System.out.println(b1.getText());
                 numberString += "1";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b2) {
                 System.out.println(b2.getText());
                 numberString += "2";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
                 numberString += "3";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
                 numberString += "3";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b4) {
                 System.out.println(b4.getText());
                 numberString += "4";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b5) {
                 System.out.println(b5.getText());
                 numberString += "5";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b6) {
                 System.out.println(b6.getText());
                 numberString += "6";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b7) {
                 System.out.println(b7.getText());
                 numberString += "7";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b8) {
                 System.out.println(b8.getText());
                 numberString += "8";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b9) {
                 System.out.println(b9.getText());
                 numberString += "9";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             } else if (e.getSource() == b0) {
                 System.out.println(b0.getText());
                 numberString += "0";
-                pssPass.setText(numberString);
+                field.setText(numberString);
             }
             btnCheck.requestFocus();
         }
@@ -119,6 +131,8 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         lblHora2 = new javax.swing.JLabel();
         lblHora3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        identificationId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CheckMeIn - Validate Access");
@@ -140,23 +154,28 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(20, 20, 166, 48);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel4.setText("Badge ID");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(180, 260, 69, 25);
 
         pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        pssPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pssPassFocusGained(evt);
+            }
+        });
         pssPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pssPassActionPerformed(evt);
             }
         });
         jPanel1.add(pssPass);
-        pssPass.setBounds(270, 260, 180, 31);
+        pssPass.setBounds(270, 250, 180, 35);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(480, 20, 128, 128);
+        jLabel5.setBounds(490, 10, 128, 128);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel2.setText("Validate Access");
@@ -286,7 +305,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
                     .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         numberPanelLayout.setVerticalGroup(
             numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +352,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         message.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(message);
-        message.setBounds(140, 190, 360, 40);
+        message.setBounds(140, 150, 360, 40);
 
         btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,6 +380,20 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         jPanel1.add(lblHora3);
         lblHora3.setBounds(300, 30, 80, 30);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        jLabel6.setText("ID");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(180, 210, 70, 25);
+
+        identificationId.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        identificationId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                identificationIdFocusGained(evt);
+            }
+        });
+        jPanel1.add(identificationId);
+        identificationId.setBounds(270, 210, 180, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -383,31 +416,42 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
 
         check check = new check();
+
         String badgeId = new String(pssPass.getPassword());
+        String identification = identificationId.getText();
+
         Integer id = check.searchEmployeeByBadgeId(badgeId);
+        String employee = check.searchEmployeeByIdentificationId(identification);
+
         Boolean hasTag = check.hasTag(id, "Fingerprint Register");
         System.out.println(badgeId);
+        System.out.println(identification);
+        System.out.println(employee);
 
-        if (!badgeId.isEmpty()) {
-            if (id != 0) {
-                if (hasTag) {
-                    FrmLectorRegister obj = new FrmLectorRegister();
-                    obj.setVisible(true);
-                    this.setVisible(false);
-                    pssPass.setText(null);
-                    numberString = "";
+        if (employee == null ) {
+            sendText("The employee does not exist", 0);
+        } else {
+            if (!badgeId.isEmpty()) {
+                if (id != 0) {
+                    if (hasTag) {
+                        FrmLectorRegister obj = new FrmLectorRegister();
+                        obj.setVisible(true);
+                        this.setVisible(false);
+                        pssPass.setText(null);
+                        numberString = "";
+                    } else {
+                        sendText("You are not allowed", 0);
+                        pssPass.setText(null);
+                        numberString = "";
+                    }
                 } else {
-                    sendText("You are not allowed", 0);
+                    sendText("The Badge ID was not found", 0);
                     pssPass.setText(null);
                     numberString = "";
                 }
             } else {
-                sendText("The Badge ID was not found", 0);
-                pssPass.setText(null);
-                numberString = "";
+                sendText("The Badge ID is Empty", 0);
             }
-        } else {
-            sendText("The Badge ID is Empty", 0);
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
@@ -428,12 +472,24 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private void btnClearbtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearbtnAceptarActionPerformed
         // TODO add your handling code here:
         pssPass.setText(null);
+        identificationId.setText(null);
         numberString = "";
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
 
     private void pssPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssPassActionPerformed
         btnCheckActionPerformed(evt);
     }//GEN-LAST:event_pssPassActionPerformed
+
+    private void identificationIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_identificationIdFocusGained
+        activeField = "identificationId";
+        numberString = identificationId.getText();
+    }//GEN-LAST:event_identificationIdFocusGained
+
+    private void pssPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pssPassFocusGained
+        activeField = "pssPass";
+        String badgeId = new String(pssPass.getPassword());
+        numberString = badgeId;
+    }//GEN-LAST:event_pssPassFocusGained
 
     public static void main(String args[]) {
         /* Set the Windows look and feel */
@@ -484,10 +540,12 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private javax.swing.JButton b9;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnClear;
+    private javax.swing.JTextField identificationId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblHora2;

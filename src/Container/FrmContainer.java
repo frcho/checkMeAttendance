@@ -5,11 +5,8 @@ import Internals.check;
 import Logging.OdooXmlRpc;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
+
 
 public class FrmContainer extends javax.swing.JFrame {
 
@@ -282,8 +279,7 @@ public class FrmContainer extends javax.swing.JFrame {
         FrmRegistValidate obj = new FrmRegistValidate();
         obj.setVisible(true);
         this.setVisible(false);
-        
-        
+
 //         check check = new check();
 //
 //        List employeList = check.allEmployee();
@@ -305,8 +301,6 @@ public class FrmContainer extends javax.swing.JFrame {
 //                null,
 //                options,
 //                options[0]);
-
-
 //        int action;
 //        String badgeId = "";
 //        check check = new check();

@@ -2,15 +2,11 @@ package Internals;
 
 import Logging.OdooXmlRpc;
 import Utils.Util;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 /**
  *
@@ -25,7 +21,8 @@ public class check {
      */
     public OdooXmlRpc connection() {
         OdooXmlRpc odoo = new OdooXmlRpc();
-        odoo.login("http://localhost:8071", "odoo", "info@uva3.com", "aaa");
+        odoo.login("http://localhost:8069", "testing", "info@uva3.com", "aaa");
+//        odoo.login("http://localhost:8071", "odoo", "info@uva3.com", "aaa");
         return odoo;
     }
 
@@ -93,7 +90,7 @@ public class check {
     }
 
     /**
-     * Method to allow search employees using a email and badge
+     * Method to allow search employees using badge id
      *
      * @param badge
      * @return List
@@ -126,7 +123,31 @@ public class check {
 
         return employee;
     }
+    
+    
+    /**
+     * Method to allow search employees using badge id
+     *
+     * @param identification
+     * @return List
+     */
+    public String searchEmployeeByIdentificationId(String identification) {
+        OdooXmlRpc odoo = this.connection();
+        List AllFilters = new ArrayList<>();
+        AllFilters.add(asList("identification_id", "=", identification));
 
+        List employee = odoo.getRecords("hr.employee",
+                asList("name"), AllFilters);
+
+        if (!employee.isEmpty()) {
+            HashMap emp = (HashMap) employee.get(0);
+            String id = (String) emp.get("name");
+            return id;
+        }
+
+        return null;
+    }
+    
     /**
      * Method to allow search employees using a email
      *

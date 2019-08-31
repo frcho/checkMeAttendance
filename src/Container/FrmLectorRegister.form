@@ -71,7 +71,7 @@
                   <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                   <Component id="lblImagenHuella" min="-2" pref="138" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
-                  <Component id="lblNumberTimes" min="-2" pref="131" max="-2" attributes="0"/>
+                  <Component id="lblNumberOfAttempts" min="-2" pref="131" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
@@ -97,7 +97,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblImagenHuella" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                      <Component id="lblNumberTimes" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
+                      <Component id="lblNumberOfAttempts" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -152,7 +152,7 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblNumberTimes">
+        <Component class="javax.swing.JLabel" name="lblNumberOfAttempts">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="120" style="0"/>

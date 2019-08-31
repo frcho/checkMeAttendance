@@ -164,7 +164,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
 
     public void EstadoHuellas() {
 
-        lblNumberTimes.setText("" + Reclutador.getFeaturesNeeded());
+        lblNumberOfAttempts.setText("" + Reclutador.getFeaturesNeeded());
         EnviarTexto("Muestra de Huellas Necesarias para Guardar la Huella. Template " + Reclutador.getFeaturesNeeded());
     }
 
@@ -295,7 +295,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 //Adding elements to map  
                 data.put("x_fingerprint", fingerDataEncode);
                 check.addFingerprintToEmployee(id, data);
-                lblNumberTimes.setText("4");
+                lblNumberOfAttempts.setText("4");
 //            System.out.println(emp);
 //            System.out.println(check.searchEmployee("aiden.hughes71@example.com"));
             }
@@ -312,7 +312,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         lblImagenHuella = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
-        lblNumberTimes = new javax.swing.JLabel();
+        lblNumberOfAttempts = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -343,9 +343,9 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         lblStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblNumberTimes.setFont(new java.awt.Font("Tahoma", 0, 120)); // NOI18N
-        lblNumberTimes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNumberTimes.setText("4");
+        lblNumberOfAttempts.setFont(new java.awt.Font("Tahoma", 0, 120)); // NOI18N
+        lblNumberOfAttempts.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNumberOfAttempts.setText("4");
 
         btnSave.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,7 +380,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 .addGap(156, 156, 156)
                 .addComponent(lblImagenHuella, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(168, 168, 168)
-                .addComponent(lblNumberTimes, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNumberOfAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -401,7 +401,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblImagenHuella, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumberTimes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNumberOfAttempts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave)
@@ -487,7 +487,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblImagenHuella;
-    private javax.swing.JLabel lblNumberTimes;
+    private javax.swing.JLabel lblNumberOfAttempts;
     private javax.swing.JLabel lblStatus;
     // End of variables declaration//GEN-END:variables
 }

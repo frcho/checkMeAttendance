@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class FrmAlter extends javax.swing.JFrame {
 
@@ -414,7 +413,7 @@ public class FrmAlter extends javax.swing.JFrame {
         check check = new check();
         String badgeId = new String(pssPass.getPassword());
         Integer id = check.searchEmployeeByBadgeId(badgeId);
-        Boolean hasTag = check.hasTag(id, "Manual Assistance");
+        Boolean hasTag = check.hasTag(id, "Manual Attendance");
         System.out.println(badgeId);
 
         if (id != 0) {
@@ -460,10 +459,13 @@ public class FrmAlter extends javax.swing.JFrame {
             pssPass.setText(null);
             numberString = "";
         }
+        
+//        Warning! Last check in was over 12 hours ago.
+//If this isn't right, please contact Human Resource staff
     }//GEN-LAST:event_btnCheckActionPerformed
-     /**
+      /**
      * Send text to label lblWorkingHour
-     * 
+     *
      * @param string message "custom message"
      * @param status
      */
@@ -544,8 +546,8 @@ public class FrmAlter extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmAlter().setVisible(true);
+            public void run() {        
+                        new FrmAlter().setVisible(true);
             }
         });
     }

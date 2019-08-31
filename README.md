@@ -26,6 +26,6 @@ This Tags must be assigne to each user for use the aplication, you would deside 
 
 ## Description
 
- - Manual Assistance: Tag that allows to user to use the code Badge ID for check in.
+ - Manual Attendance: Tag that allows to user to use the code Badge ID for check in.
  - Fingerprint Register: Tag that allows to chosse which user will have the ability for register fingerprint.
  - Fingerprint: Tag that allows a user to be listed for fingerprint register.
