@@ -20,7 +20,7 @@ public class check {
      * @return boolean
      */
     public OdooXmlRpc connection() {
-        OdooXmlRpc odoo = new OdooXmlRpc();
+        OdooXmlRpc odoo = new OdooXmlRpc();                
         odoo.login("http://localhost:8069", "odoo", "info@example.com", "aaa");
         return odoo;
     }

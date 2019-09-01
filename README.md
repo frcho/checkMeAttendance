@@ -1,5 +1,13 @@
 # checkMeAttendance
 
+## Connect with Odoo host
+
+You must to change the values in the file src/Internal/check.java in the method "connection", with the values of you Odoo host
+
+```
+odoo.login("http://localhost:8069", "odoo", "info@example.com", "aaa");
+```
+
 You can connect with your odoo host and to do check in and checkout
 
 # Odoo Settings
