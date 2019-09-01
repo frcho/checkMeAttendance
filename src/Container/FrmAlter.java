@@ -12,10 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class FrmAlter extends javax.swing.JFrame {
 
-    String numberString = "";
+    String stringNumber = "";
 
     public FrmAlter() {
         initComponents();
@@ -44,48 +46,48 @@ public class FrmAlter extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == b1) {
                 System.out.println(b1.getText());
-                numberString += "1";
-                pssPass.setText(numberString);
+                stringNumber += "1";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b2) {
                 System.out.println(b2.getText());
-                numberString += "2";
-                pssPass.setText(numberString);
+                stringNumber += "2";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
-                numberString += "3";
-                pssPass.setText(numberString);
+                stringNumber += "3";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
-                numberString += "3";
-                pssPass.setText(numberString);
+                stringNumber += "3";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b4) {
                 System.out.println(b4.getText());
-                numberString += "4";
-                pssPass.setText(numberString);
+                stringNumber += "4";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b5) {
                 System.out.println(b5.getText());
-                numberString += "5";
-                pssPass.setText(numberString);
+                stringNumber += "5";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b6) {
                 System.out.println(b6.getText());
-                numberString += "6";
-                pssPass.setText(numberString);
+                stringNumber += "6";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b7) {
                 System.out.println(b7.getText());
-                numberString += "7";
-                pssPass.setText(numberString);
+                stringNumber += "7";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b8) {
                 System.out.println(b8.getText());
-                numberString += "8";
-                pssPass.setText(numberString);
+                stringNumber += "8";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b9) {
                 System.out.println(b9.getText());
-                numberString += "9";
-                pssPass.setText(numberString);
+                stringNumber += "9";
+                badgeIdField.setText(stringNumber);
             } else if (e.getSource() == b0) {
                 System.out.println(b0.getText());
-                numberString += "0";
-                pssPass.setText(numberString);
+                stringNumber += "0";
+                badgeIdField.setText(stringNumber);
             }
             btnCheck.requestFocus();
         }
@@ -104,7 +106,7 @@ public class FrmAlter extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        pssPass = new javax.swing.JPasswordField();
+        badgeIdField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -119,6 +121,7 @@ public class FrmAlter extends javax.swing.JFrame {
         b8 = new javax.swing.JButton();
         b9 = new javax.swing.JButton();
         b0 = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         btnCheck = new javax.swing.JButton();
         employeeName = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
@@ -152,14 +155,14 @@ public class FrmAlter extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(250, 210, 69, 25);
 
-        pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        pssPass.addActionListener(new java.awt.event.ActionListener() {
+        badgeIdField.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        badgeIdField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pssPassActionPerformed(evt);
+                badgeIdFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(pssPass);
-        pssPass.setBounds(340, 210, 180, 31);
+        jPanel1.add(badgeIdField);
+        badgeIdField.setBounds(340, 210, 180, 31);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
@@ -267,6 +270,20 @@ public class FrmAlter extends javax.swing.JFrame {
         b0.setContentAreaFilled(false);
         b0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        deleteBtn.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        deleteBtn.setText("Del");
+        deleteBtn.setBorder(null);
+        deleteBtn.setBorderPainted(false);
+        deleteBtn.setContentAreaFilled(false);
+        deleteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout numberPanelLayout = new javax.swing.GroupLayout(numberPanel);
         numberPanel.setLayout(numberPanelLayout);
         numberPanelLayout.setHorizontalGroup(
@@ -290,9 +307,11 @@ public class FrmAlter extends javax.swing.JFrame {
                             .addComponent(b8))))
                 .addGap(18, 18, 18)
                 .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(deleteBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         numberPanelLayout.setVerticalGroup(
@@ -314,7 +333,9 @@ public class FrmAlter extends javax.swing.JFrame {
                     .addComponent(b8)
                     .addComponent(b9))
                 .addGap(18, 18, 18)
-                .addComponent(b0)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b0)
+                    .addComponent(deleteBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -411,59 +432,69 @@ public class FrmAlter extends javax.swing.JFrame {
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
 
         check check = new check();
-        String badgeId = new String(pssPass.getPassword());
-        Integer id = check.searchEmployeeByBadgeId(badgeId);
-        Boolean hasTag = check.hasTag(id, "Manual Attendance");
-        System.out.println(badgeId);
-
-        if (id != 0) {
-            if (hasTag) {
-                Map attendance = check.checkinOut(id);
-                System.out.println(attendance);
-
-                Integer idEmployee = (int) attendance.get("employee_id");
-                List employee = check.searchEmployeeById(idEmployee);
-
-                if (!employee.isEmpty()) {
-                    HashMap emp = (HashMap) employee.get(0);
-                    String name = (String) emp.get("name");
-                    employeeName.setText(name);
-                    System.out.println(name);
-                    if (attendance.containsKey("check_out")) {
-
-                        String checkIn = (String) attendance.get("check_in");
-                        String checkOut = (String) attendance.get("check_out");
-
-                        String calculateWorkedTime = Util.DifferenceBetweenDates(checkIn, checkOut);
-
-                        sendHour(calculateWorkedTime, 0);
-
-                        sendTextInOut(name, Color.ORANGE);
-                    } else {
-                        String checkIn = (String) attendance.get("check_in");
-                        sendHour(checkIn, 1);
-                        sendTextInOut(name, Color.GREEN);
-                    }
-
-                }
-                pssPass.setText(null);
-                numberString = "";
-
-            } else {
-                sendTextInOut("You are not allowed", Color.RED);
-                pssPass.setText(null);
-                numberString = "";
-            }
+        if (check.isConnected()) {
+            JOptionPane.showMessageDialog(null, "Connection Problems", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            sendTextInOut("The Badge ID was not found", Color.RED);
-            pssPass.setText(null);
-            numberString = "";
+            String badgeId = new String(badgeIdField.getPassword());
+            if (!badgeId.isEmpty()) {
+                Integer id = check.searchEmployeeByBadgeId(badgeId);
+                if (id != 0) {
+                    Boolean hasTag = check.hasTag(id, "Manual Attendance");
+                    System.out.println(badgeId);
+                    if (hasTag) {
+                        Map attendance = check.checkinOut(id);
+                        System.out.println(attendance);
+
+                        Integer idEmployee = (int) attendance.get("employee_id");
+                        List employee = check.searchEmployeeById(idEmployee);
+
+                        if (!employee.isEmpty()) {
+                            HashMap emp = (HashMap) employee.get(0);
+                            String name = (String) emp.get("name");
+                            employeeName.setText(name);
+                            System.out.println(name);
+                            if (attendance.containsKey("check_out")) {
+
+                                String checkIn = (String) attendance.get("check_in");
+                                String checkOut = (String) attendance.get("check_out");
+
+                                String calculateWorkedTime = Util.DifferenceBetweenDates(checkIn, checkOut);
+
+                                sendHour(calculateWorkedTime, 0);
+
+                                sendTextInOut(name, Color.ORANGE, 30);
+                            } else {
+                                String checkIn = (String) attendance.get("check_in");
+                                sendHour(checkIn, 1);
+                                sendTextInOut(name, Color.GREEN, 30);
+                            }
+
+                        }
+                        badgeIdField.setText(null);
+                        stringNumber = "";
+
+                    } else {
+                        sendTextInOut("You don't have the 'Manual Fingerprint' Tag", Color.RED, 15);
+                        badgeIdField.setText(null);
+                        lblWorkingHour.setText(null);
+                        stringNumber = "";
+                    }
+                } else {
+                    sendTextInOut("The Badge ID was not found", Color.RED, 30);
+                    badgeIdField.setText(null);
+                    lblWorkingHour.setText(null);
+                    stringNumber = "";
+                }
+            } else {
+                sendTextInOut("The Badge ID is Empty", Color.RED, 25);
+            }
         }
-        
+
 //        Warning! Last check in was over 12 hours ago.
 //If this isn't right, please contact Human Resource staff
     }//GEN-LAST:event_btnCheckActionPerformed
-      /**
+    /**
      * Send text to label lblWorkingHour
      *
      * @param string message "custom message"
@@ -485,10 +516,10 @@ public class FrmAlter extends javax.swing.JFrame {
      *
      * @param string message "custom message"
      * @param color Color e.g Color.orange
+     * @param fontSize Size font
      */
-    public void sendTextInOut(String string, Color color) {
-        employeeName.setText(string);
-        employeeName.setFont(new java.awt.Font("Tahoma", 0, 30));
+    public void sendTextInOut(String string, Color color, Integer fontSize) {
+        employeeName.setFont(new java.awt.Font("Tahoma", 0, fontSize));
         employeeName.setForeground(color);
         employeeName.setText(string);
     }
@@ -496,8 +527,8 @@ public class FrmAlter extends javax.swing.JFrame {
 
     private void btnClearbtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearbtnAceptarActionPerformed
         // TODO add your handling code here:
-        pssPass.setText(null);
-        numberString = "";
+        badgeIdField.setText(null);
+        stringNumber = "";
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
 
     private void btnChangebtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangebtnAceptarActionPerformed
@@ -512,9 +543,20 @@ public class FrmAlter extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnChangebtnAceptarActionPerformed
 
-    private void pssPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssPassActionPerformed
+    private void badgeIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badgeIdFieldActionPerformed
         btnCheckActionPerformed(evt);
-    }//GEN-LAST:event_pssPassActionPerformed
+    }//GEN-LAST:event_badgeIdFieldActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+
+        if (!badgeIdField.getText().isEmpty()) {
+            badgeIdField.setText("" + badgeIdField.getText().substring(0, badgeIdField.getText().length() - 1));
+            String badgeId = new String(badgeIdField.getPassword());
+            stringNumber = badgeId;
+        }
+
+
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows look and feel */
@@ -546,8 +588,8 @@ public class FrmAlter extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {        
-                        new FrmAlter().setVisible(true);
+            public void run() {
+                new FrmAlter().setVisible(true);
             }
         });
     }
@@ -562,9 +604,11 @@ public class FrmAlter extends javax.swing.JFrame {
     private javax.swing.JButton b7;
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
+    private javax.swing.JPasswordField badgeIdField;
     private javax.swing.JButton btnChange;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -576,6 +620,5 @@ public class FrmAlter extends javax.swing.JFrame {
     private javax.swing.JLabel lblHora3;
     private javax.swing.JLabel lblWorkingHour;
     private javax.swing.JPanel numberPanel;
-    private javax.swing.JPasswordField pssPass;
     // End of variables declaration//GEN-END:variables
 }

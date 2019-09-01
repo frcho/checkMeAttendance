@@ -1,6 +1,5 @@
 package Container;
 
-import DB.ConexionMySQL;
 import Internals.check;
 import Internals.reloj;
 import com.digitalpersona.onetouch.DPFPDataPurpose;
@@ -23,13 +22,12 @@ import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
 import static com.digitalpersona.onetouch.processing.DPFPTemplateStatus.TEMPLATE_STATUS_FAILED;
 import static com.digitalpersona.onetouch.processing.DPFPTemplateStatus.TEMPLATE_STATUS_READY;
 import com.digitalpersona.onetouch.verification.DPFPVerification;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +35,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -64,11 +61,24 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         reloj obj = new reloj(lblHora);
         obj.start();
         this.setLocationRelativeTo(null);
+        sendText(FrmRegistValidate.employeeNameToSave, Color.BLUE);
     }
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Resources/icon.png"));
         return retValue;
+    }
+
+    /**
+     * Send text to label employeeName
+     *
+     * @param string message "custom message"
+     * @param color Color e.g Color.orange
+     */
+    public void sendText(String string, Color color) {
+        employeeName.setFont(new java.awt.Font("Tahoma", 0, 20));
+        employeeName.setForeground(color);
+        employeeName.setText(string);
     }
 
     protected void Iniciar() {
@@ -169,7 +179,6 @@ public class FrmLectorRegister extends javax.swing.JFrame {
     }
 
     public void EnviarTexto(String string) {
-        //txtArea.append(string + "\n");
         lblStatus.setText(string);
     }
 
@@ -209,11 +218,8 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 Image image = CrearImagenHuella(sample);
                 DibujarHuella(image);
 
-//                btnVerificar.setEnabled(true);
-//                btnIdentificar.setEnabled(true);
             } catch (DPFPImageQualityException ex) {
                 JOptionPane.showMessageDialog(null, ex);
-//                System.err.println("Error: "+ex.getMessage());
             } finally {
                 EstadoHuellas();
                 // Comprueba si la plantilla se ha creado.
@@ -263,41 +269,25 @@ public class FrmLectorRegister extends javax.swing.JFrame {
 //        byte[] decoded = Base64.getDecoder().decode(encoded);
 //        System.out.println("Base 64 Decoded  String : " + new String(decoded));
         check check = new check();
-
-        List employeList = check.allEmployee();
-        List<String> optionList = new ArrayList<>();
-
-        int i = 0;
-        while (i < employeList.size()) {
-            HashMap emp = (HashMap) employeList.get(i);
-            String email = (String) emp.get("work_email");
-            optionList.add(email);
-            i++;
-        }
-
-        Object[] options = optionList.toArray();
-        Object selectedEmailEmployee = JOptionPane.showInputDialog(null,
-                "Choice Employee?",
-                "Fingerprint",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
-        if (selectedEmailEmployee != null) {
-            System.out.println(selectedEmailEmployee);
-
-            List employee = check.searchEmployee((String) selectedEmailEmployee);
+        if (check.isConnected()) {
+            JOptionPane.showMessageDialog(null, "Connection Problems", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            List employee = check.searchEmployeeById(FrmRegistValidate.idEmployeeToSave);
 
             if (!employee.isEmpty()) {
                 HashMap emp = (HashMap) employee.get(0);
                 int id = (int) emp.get("id");
                 Map data = new HashMap();
                 //Adding elements to map  
+//                data.put("x_fingerprint", "Genial");
                 data.put("x_fingerprint", fingerDataEncode);
                 check.addFingerprintToEmployee(id, data);
+                
+                
                 lblNumberOfAttempts.setText("4");
-//            System.out.println(emp);
-//            System.out.println(check.searchEmployee("aiden.hughes71@example.com"));
+                btnSave.setEnabled(false);
+                sendText("Fingerprint Saved", Color.GREEN);
             }
         }
     }
@@ -314,6 +304,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         lblNumberOfAttempts = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        employeeName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CheckMe Register");
@@ -361,6 +352,8 @@ public class FrmLectorRegister extends javax.swing.JFrame {
             }
         });
 
+        employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -376,15 +369,19 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                         .addGap(101, 101, 101)
                         .addComponent(jLabel1)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(156, 156, 156)
                 .addComponent(lblImagenHuella, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(168, 168, 168)
                 .addComponent(lblNumberOfAttempts, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(btnSave)
                 .addGap(241, 241, 241))
@@ -406,7 +403,9 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave)
                     .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -427,7 +426,6 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         Iniciar();
         start();
         btnSave.setEnabled(false);
-//        EstadoHuellas();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -482,6 +480,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel employeeName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

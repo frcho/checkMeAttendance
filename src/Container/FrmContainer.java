@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
-
 public class FrmContainer extends javax.swing.JFrame {
 
     public FrmContainer() {
@@ -276,53 +275,19 @@ public class FrmContainer extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
 
-        FrmRegistValidate obj = new FrmRegistValidate();
-        obj.setVisible(true);
-        this.setVisible(false);
-
-//         check check = new check();
-//
-//        List employeList = check.allEmployee();
-//        List<String> optionList = new ArrayList<>();
-//
-//        int i = 0;
-//        while (i < employeList.size()) {
-//            HashMap emp = (HashMap) employeList.get(i);
-//            String email = (String) emp.get("work_email");
-//            optionList.add(email);
-//            i++;
-//        }
-//
-//        Object[] options = optionList.toArray();
-//        Object selectedEmailEmployee = JOptionPane.showInputDialog(null,
-//                "Choice Employee?",
-//                "Fingerprint",
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                options,
-//                options[0]);
-//        int action;
-//        String badgeId = "";
-//        check check = new check();
-//        do {
-//            JPasswordField badge = new JPasswordField(10);
-//            action = JOptionPane.showConfirmDialog(null, badge, "Enter Badge ID", JOptionPane.OK_CANCEL_OPTION);
-//            System.out.println(action);
-//            if (action < 0) {
-//                JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
-//            } else {
-//                badgeId = new String(badge.getPassword());
-//                Integer id = check.searchEmployeeByBadgeId(badgeId);
-//                Boolean hasTag = check.hasTag(id, "Fingerprint");
-//
-//                if (hasTag) {
-//                    FrmLectorRegister obj = new FrmLectorRegister();
-//                    obj.setVisible(true);
-//                    this.setVisible(false);
-//                    action = 2;
-//                }
-//            }
-//        } while ((!badgeId.equals("0") &&  action != 2));
+        check check = new check();
+        if (check.isConnected()) {
+            JOptionPane.showMessageDialog(null, "Connection Problems", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (check.existFingerprintField()) {
+                FrmRegistValidate obj = new FrmRegistValidate();
+                obj.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "You need to add a x_fingerprint field to odoo model hr.employee, more information in README.md ");
+            }
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     public static void main(String args[]) {

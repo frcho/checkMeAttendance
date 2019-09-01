@@ -21,9 +21,21 @@ public class check {
      */
     public OdooXmlRpc connection() {
         OdooXmlRpc odoo = new OdooXmlRpc();
-        odoo.login("http://localhost:8069", "testing", "info@uva3.com", "aaa");
-//        odoo.login("http://localhost:8071", "odoo", "info@uva3.com", "aaa");
+        odoo.login("http://localhost:8069", "odoo", "info@example.com", "aaa");
         return odoo;
+    }
+
+    /**
+     * Method to validate isConnected
+     *
+     * @return Boolean
+     */
+    public Boolean isConnected() {
+        OdooXmlRpc odoo = this.connection();
+        if (odoo.isConnected()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -120,34 +132,45 @@ public class check {
         List employee = odoo.getRecords("hr.employee",
                 asList("id", "name", "work_email"), AllFilters);
 
-
         return employee;
     }
-    
-    
+
     /**
      * Method to allow search employees using badge id
      *
      * @param identification
      * @return List
      */
-    public String searchEmployeeByIdentificationId(String identification) {
+    public Map searchEmployeeByIdentificationId(String identification) {
         OdooXmlRpc odoo = this.connection();
         List AllFilters = new ArrayList<>();
         AllFilters.add(asList("identification_id", "=", identification));
 
         List employee = odoo.getRecords("hr.employee",
-                asList("name"), AllFilters);
+                asList("id", "name"), AllFilters);
 
         if (!employee.isEmpty()) {
             HashMap emp = (HashMap) employee.get(0);
-            String id = (String) emp.get("name");
-            return id;
+            return emp;
         }
 
         return null;
     }
-    
+
+    /**
+     * Method to validate if x_fingerprint field exist This field is needed for
+     * save de fingerprint of each user
+     *
+     * @return Boolean
+     */
+    public Boolean existFingerprintField() {
+        OdooXmlRpc odoo = this.connection();
+
+        Map employee = odoo.listRecords("hr.employee");
+
+        return employee.containsKey("x_fingerprint");
+    }
+
     /**
      * Method to allow search employees using a email
      *
@@ -239,7 +262,7 @@ public class check {
      *
      * @return List
      */
-    public List allEmployeeWithFingerPrint() {
+    public List allEmployeeWithFingerprint() {
         OdooXmlRpc odoo = this.connection();
 
         List AllFilters = new ArrayList<>();

@@ -7,12 +7,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class FrmRegistValidate extends javax.swing.JFrame {
 
-    String numberString = "";
+    String stringNumber = "";
     String activeField = "jTextField1";
+    public static Integer idEmployeeToSave = 0;
+    public static String employeeNameToSave = "";
 
     public FrmRegistValidate() {
         initComponents();
@@ -42,61 +46,60 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (activeField.equals("identificationId")) {
-                field = identificationId;
+            if (activeField.equals("idNumberField")) {
+                field = idNumberField;
             }
-            if (activeField.equals("pssPass")) {
-                field = pssPass;
+            if (activeField.equals("badgeIdField")) {
+                field = badgeIdField;
             }
 
             if (e.getSource() == b1) {
                 System.out.println(b1.getText());
-                numberString += "1";
-                field.setText(numberString);
+                stringNumber += "1";
+                field.setText(stringNumber);
             } else if (e.getSource() == b2) {
                 System.out.println(b2.getText());
-                numberString += "2";
-                field.setText(numberString);
+                stringNumber += "2";
+                field.setText(stringNumber);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
-                numberString += "3";
-                field.setText(numberString);
+                stringNumber += "3";
+                field.setText(stringNumber);
             } else if (e.getSource() == b3) {
                 System.out.println(b3.getText());
-                numberString += "3";
-                field.setText(numberString);
+                stringNumber += "3";
+                field.setText(stringNumber);
             } else if (e.getSource() == b4) {
                 System.out.println(b4.getText());
-                numberString += "4";
-                field.setText(numberString);
+                stringNumber += "4";
+                field.setText(stringNumber);
             } else if (e.getSource() == b5) {
                 System.out.println(b5.getText());
-                numberString += "5";
-                field.setText(numberString);
+                stringNumber += "5";
+                field.setText(stringNumber);
             } else if (e.getSource() == b6) {
                 System.out.println(b6.getText());
-                numberString += "6";
-                field.setText(numberString);
+                stringNumber += "6";
+                field.setText(stringNumber);
             } else if (e.getSource() == b7) {
                 System.out.println(b7.getText());
-                numberString += "7";
-                field.setText(numberString);
+                stringNumber += "7";
+                field.setText(stringNumber);
             } else if (e.getSource() == b8) {
                 System.out.println(b8.getText());
-                numberString += "8";
-                field.setText(numberString);
+                stringNumber += "8";
+                field.setText(stringNumber);
             } else if (e.getSource() == b9) {
                 System.out.println(b9.getText());
-                numberString += "9";
-                field.setText(numberString);
+                stringNumber += "9";
+                field.setText(stringNumber);
             } else if (e.getSource() == b0) {
                 System.out.println(b0.getText());
-                numberString += "0";
-                field.setText(numberString);
+                stringNumber += "0";
+                field.setText(stringNumber);
             }
             btnCheck.requestFocus();
         }
-
     }
 
     public Image getIconImage() {
@@ -111,7 +114,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        pssPass = new javax.swing.JPasswordField();
+        badgeIdField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
@@ -126,13 +129,14 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         b8 = new javax.swing.JButton();
         b9 = new javax.swing.JButton();
         b0 = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         btnCheck = new javax.swing.JButton();
         message = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
         lblHora2 = new javax.swing.JLabel();
         lblHora3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        identificationId = new javax.swing.JTextField();
+        idNumberField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CheckMeIn - Validate Access");
@@ -157,21 +161,21 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel4.setText("Badge ID");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(180, 260, 69, 25);
+        jLabel4.setBounds(180, 250, 90, 25);
 
-        pssPass.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        pssPass.addFocusListener(new java.awt.event.FocusAdapter() {
+        badgeIdField.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        badgeIdField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                pssPassFocusGained(evt);
+                badgeIdFieldFocusGained(evt);
             }
         });
-        pssPass.addActionListener(new java.awt.event.ActionListener() {
+        badgeIdField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pssPassActionPerformed(evt);
+                badgeIdFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(pssPass);
-        pssPass.setBounds(270, 250, 180, 35);
+        jPanel1.add(badgeIdField);
+        badgeIdField.setBounds(280, 250, 180, 31);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/administrator2-128.png"))); // NOI18N
         jPanel1.add(jLabel5);
@@ -279,6 +283,20 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         b0.setContentAreaFilled(false);
         b0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        deleteBtn.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/fondoBoton0.png"))); // NOI18N
+        deleteBtn.setText("Del");
+        deleteBtn.setBorder(null);
+        deleteBtn.setBorderPainted(false);
+        deleteBtn.setContentAreaFilled(false);
+        deleteBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout numberPanelLayout = new javax.swing.GroupLayout(numberPanel);
         numberPanel.setLayout(numberPanelLayout);
         numberPanelLayout.setHorizontalGroup(
@@ -302,10 +320,12 @@ public class FrmRegistValidate extends javax.swing.JFrame {
                             .addComponent(b8))))
                 .addGap(18, 18, 18)
                 .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(b3, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(b6, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(b9, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(deleteBtn))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         numberPanelLayout.setVerticalGroup(
             numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,7 +346,9 @@ public class FrmRegistValidate extends javax.swing.JFrame {
                     .addComponent(b8)
                     .addComponent(b9))
                 .addGap(18, 18, 18)
-                .addComponent(b0)
+                .addGroup(numberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b0)
+                    .addComponent(deleteBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -352,7 +374,7 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         message.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(message);
-        message.setBounds(140, 150, 360, 40);
+        message.setBounds(40, 150, 550, 40);
 
         btnClear.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -381,18 +403,18 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         lblHora3.setBounds(300, 30, 80, 30);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jLabel6.setText("ID");
+        jLabel6.setText("ID number");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(180, 210, 70, 25);
+        jLabel6.setBounds(180, 210, 100, 25);
 
-        identificationId.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        identificationId.addFocusListener(new java.awt.event.FocusAdapter() {
+        idNumberField.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        idNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                identificationIdFocusGained(evt);
+                idNumberFieldFocusGained(evt);
             }
         });
-        jPanel1.add(identificationId);
-        identificationId.setBounds(270, 210, 180, 40);
+        jPanel1.add(idNumberField);
+        idNumberField.setBounds(280, 210, 180, 31);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -416,80 +438,119 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
 
         check check = new check();
-
-        String badgeId = new String(pssPass.getPassword());
-        String identification = identificationId.getText();
-
-        Integer id = check.searchEmployeeByBadgeId(badgeId);
-        String employee = check.searchEmployeeByIdentificationId(identification);
-
-        Boolean hasTag = check.hasTag(id, "Fingerprint Register");
-        System.out.println(badgeId);
-        System.out.println(identification);
-        System.out.println(employee);
-
-        if (employee == null ) {
-            sendText("The employee does not exist", 0);
+        if (check.isConnected()) {
+            JOptionPane.showMessageDialog(null, "Connection Problems", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            if (!badgeId.isEmpty()) {
-                if (id != 0) {
-                    if (hasTag) {
-                        FrmLectorRegister obj = new FrmLectorRegister();
-                        obj.setVisible(true);
-                        this.setVisible(false);
-                        pssPass.setText(null);
-                        numberString = "";
+            String identification = idNumberField.getText();
+
+            Map employeeData = check.searchEmployeeByIdentificationId(identification);
+
+            if (employeeData == null) {
+                sendText("The employee with the 'ID Number' " + identification + " given doesn't exist", Color.BLUE, 15);
+            } else {
+                idEmployeeToSave = (Integer) employeeData.get("id");
+                employeeNameToSave = (String) employeeData.get("name");
+
+                Boolean employeeHasTag = check.hasTag(idEmployeeToSave, "Fingerprint");
+                //Validate if employee has Fingerprint in Odoo
+                if (employeeHasTag) {
+                    System.out.println(identification);
+                    System.out.println(idEmployeeToSave);
+                    System.out.println(employeeNameToSave);
+
+                    String badgeId = new String(badgeIdField.getPassword());
+                    if (!badgeId.isEmpty()) {
+                        Integer id = check.searchEmployeeByBadgeId(badgeId);
+                        if (id != 0) {
+                            Boolean hasTag = check.hasTag(id, "Fingerprint Register");
+                            if (hasTag) {
+                                FrmLectorRegister obj = new FrmLectorRegister();
+                                obj.setVisible(true);
+                                this.setVisible(false);
+                                badgeIdField.setText(null);
+                                stringNumber = "";
+                            } else {
+                                sendText("You don't have the 'Fingerprint Register' Tag", Color.RED, 25);
+                                badgeIdField.setText(null);
+                                stringNumber = "";
+                            }
+                        } else {
+                            sendText("The Badge ID was not found", Color.RED, 25);
+                            badgeIdField.setText(null);
+                            stringNumber = "";
+                        }
                     } else {
-                        sendText("You are not allowed", 0);
-                        pssPass.setText(null);
-                        numberString = "";
+                        sendText("The Badge ID is Empty", Color.RED, 25);
                     }
                 } else {
-                    sendText("The Badge ID was not found", 0);
-                    pssPass.setText(null);
-                    numberString = "";
+                    sendText("The employee doesn't have the 'Fingerprint' Tag. ", Color.RED, 25);
+                    badgeIdField.setText(null);
+                    stringNumber = "";
                 }
-            } else {
-                sendText("The Badge ID is Empty", 0);
             }
         }
+
     }//GEN-LAST:event_btnCheckActionPerformed
 
     /**
-     * Allo to send text to label
+     * Allow to send text to label
      *
      * @param string
-     * @param status
+     * @param color
+     * @param fontSize
      */
-    public void sendText(String string, Integer status) {
-        message.setForeground(Color.RED);
+    public void sendText(String string, Color color, Integer fontSize) {
+        message.setFont(new java.awt.Font("Tahoma", 0, fontSize));
+        message.setForeground(color);
         message.setText(string);
-        message.setFont(new java.awt.Font("Tahoma", 0, 25));
-
     }
-
 
     private void btnClearbtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearbtnAceptarActionPerformed
         // TODO add your handling code here:
-        pssPass.setText(null);
-        identificationId.setText(null);
-        numberString = "";
+        badgeIdField.setText(null);
+        idNumberField.setText(null);
+        stringNumber = "";
     }//GEN-LAST:event_btnClearbtnAceptarActionPerformed
 
-    private void pssPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pssPassActionPerformed
+    private void badgeIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badgeIdFieldActionPerformed
         btnCheckActionPerformed(evt);
-    }//GEN-LAST:event_pssPassActionPerformed
+    }//GEN-LAST:event_badgeIdFieldActionPerformed
 
-    private void identificationIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_identificationIdFocusGained
-        activeField = "identificationId";
-        numberString = identificationId.getText();
-    }//GEN-LAST:event_identificationIdFocusGained
+    private void idNumberFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idNumberFieldFocusGained
+        activeField = "idNumberField";
+        stringNumber = idNumberField.getText();
+    }//GEN-LAST:event_idNumberFieldFocusGained
 
-    private void pssPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pssPassFocusGained
-        activeField = "pssPass";
-        String badgeId = new String(pssPass.getPassword());
-        numberString = badgeId;
-    }//GEN-LAST:event_pssPassFocusGained
+    private void badgeIdFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_badgeIdFieldFocusGained
+        activeField = "badgeIdField";
+        String badgeId = new String(badgeIdField.getPassword());
+        stringNumber = badgeId;
+    }//GEN-LAST:event_badgeIdFieldFocusGained
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+
+        JTextField field = new JTextField();
+        if (activeField.equals("idNumberField")) {
+            field = idNumberField;
+        }
+        if (activeField.equals("badgeIdField")) {
+            field = badgeIdField;
+        }
+        
+        if (!field.getText().isEmpty()) {
+            field.setText("" + field.getText().substring(0, field.getText().length() - 1));
+        }
+        
+        if (activeField.equals("idNumberField")) {
+            stringNumber = idNumberField.getText();
+        }
+        if (activeField.equals("badgeIdField")) {
+            String badgeId = new String(badgeIdField.getPassword());
+            stringNumber = badgeId;
+        }
+
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows look and feel */
@@ -538,9 +599,11 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private javax.swing.JButton b7;
     private javax.swing.JButton b8;
     private javax.swing.JButton b9;
+    private javax.swing.JPasswordField badgeIdField;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnClear;
-    private javax.swing.JTextField identificationId;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JTextField idNumberField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -552,6 +615,5 @@ public class FrmRegistValidate extends javax.swing.JFrame {
     private javax.swing.JLabel lblHora3;
     private javax.swing.JLabel message;
     private javax.swing.JPanel numberPanel;
-    private javax.swing.JPasswordField pssPass;
     // End of variables declaration//GEN-END:variables
 }

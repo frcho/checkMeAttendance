@@ -246,15 +246,13 @@ public class FrmLector extends javax.swing.JFrame {
 
         if (featuresverificacion != null) {
             check check = new check();
-            List employeList = check.allEmployeeWithFingerPrint();
+            List employeList = check.allEmployeeWithFingerprint();
 
             int i = 0;
             while (i < employeList.size()) {
                 HashMap emp = (HashMap) employeList.get(i);
-//          String email = (String) emp.get("work_email");
-//          List employee = check.searchEmployee((String) selectedEmailEmployee);
+
                 if (!employeList.isEmpty()) {
-//                HashMap emp = (HashMap) employee.get(0);
                     Integer id = (Integer) emp.get("id");
                     String name = (String) emp.get("name");
                     String finger = (String) emp.get("x_fingerprint");
