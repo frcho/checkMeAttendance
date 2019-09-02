@@ -535,7 +535,6 @@ public class FrmRegistValidate extends javax.swing.JFrame {
             } else {
                 sendText("The employee with the 'ID Number' " + identification + " given doesn't exist", Color.BLUE, 15);
             }
-
         }
 
     }//GEN-LAST:event_btnCheckActionPerformed
