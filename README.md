@@ -20,7 +20,7 @@ The following steps describe the basic case about how to add a field to an odoo 
 2. Go to **Configuration** -> **technical** -> **Database structure**->**Models**
 3. Open for hr.employee and **edit**
 4. Add a textual field **x_fingerprint** in list **Fields** used **Add a line** for create the field
-5. Please create the field with **Text** type
+5. Please create the field with **text** type
 6. Save & Close
 
 Now when you want to save a fingerprint for one user the java application will use the field created above.

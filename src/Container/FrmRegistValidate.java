@@ -1,5 +1,6 @@
 package Container;
 
+import Internals.Employee;
 import Internals.reloj;
 import Internals.check;
 import java.awt.Color;
@@ -7,6 +8,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import static java.util.Arrays.asList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -437,6 +443,10 @@ public class FrmRegistValidate extends javax.swing.JFrame {
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
 
+        Integer id = null;
+        String name = null;
+        Boolean isChoice = true;
+
         check check = new check();
         if (check.isConnected()) {
             JOptionPane.showMessageDialog(null, "Connection Problems", "Warning",
@@ -444,51 +454,88 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         } else {
             String identification = idNumberField.getText();
 
-            Map employeeData = check.searchEmployeeByIdentificationId(identification);
+            List employeeData = check.searchEmployeeByIdentificationId(identification);
+            if (!employeeData.isEmpty()) {
+                if (employeeData.size() > 1) {
 
-            if (employeeData == null) {
-                sendText("The employee with the 'ID Number' " + identification + " given doesn't exist", Color.BLUE, 15);
-            } else {
-                idEmployeeToSave = (Integer) employeeData.get("id");
-                employeeNameToSave = (String) employeeData.get("name");
+                    ArrayList<Employee> optionList = new ArrayList<>();
 
-                Boolean employeeHasTag = check.hasTag(idEmployeeToSave, "Fingerprint");
-                //Validate if employee has Fingerprint in Odoo
-                if (employeeHasTag) {
-                    System.out.println(identification);
-                    System.out.println(idEmployeeToSave);
-                    System.out.println(employeeNameToSave);
+                    int i = 0;
+                    while (i < employeeData.size()) {
+                        HashMap emp = (HashMap) employeeData.get(i);
+                        Employee employeClass = new Employee((Integer) emp.get("id"), (String) emp.get("name"));
+                        optionList.add(employeClass);
+                        i++;
+                    }
 
-                    String badgeId = new String(badgeIdField.getPassword());
-                    if (!badgeId.isEmpty()) {
-                        Integer id = check.searchEmployeeByBadgeId(badgeId);
-                        if (id != 0) {
-                            Boolean hasTag = check.hasTag(id, "Fingerprint Register");
-                            if (hasTag) {
-                                FrmLectorRegister obj = new FrmLectorRegister();
-                                obj.setVisible(true);
-                                this.setVisible(false);
-                                badgeIdField.setText(null);
-                                stringNumber = "";
+                    Object[] options = optionList.toArray();
+
+                    Object selectedEmailEmployee = JOptionPane.showInputDialog(null,
+                            "Find " + employeeData.size() + " Employees with the same ID Number, Select the correct?",
+                            "Fingerprint",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            options,
+                            options[0]);
+                    if (selectedEmailEmployee == null) {
+                        isChoice = false;
+                    } else {
+                        String idEmployeeSelected = selectedEmailEmployee.toString().substring(selectedEmailEmployee.toString().lastIndexOf(':') + 1);
+                        String nameEmployeeSelected = selectedEmailEmployee.toString().substring(selectedEmailEmployee.toString().lastIndexOf("Name:") + 5, selectedEmailEmployee.toString().indexOf('-'));
+                        id = Integer.parseInt(idEmployeeSelected);
+                        name = nameEmployeeSelected;
+                    }
+                } else {
+                    HashMap emp = (HashMap) employeeData.get(0);
+                    id = (Integer) emp.get("id");
+                    name = (String) emp.get("name");
+                }
+
+                idEmployeeToSave = id;
+                employeeNameToSave = name;
+
+                if (isChoice) {
+                    Boolean employeeHasTag = check.hasTag(idEmployeeToSave, "Fingerprint");
+                    //Validate if employee has Fingerprint in Odoo
+                    if (employeeHasTag) {
+                        System.out.println(identification);
+                        System.out.println(idEmployeeToSave);
+                        System.out.println(employeeNameToSave);
+
+                        String badgeId = new String(badgeIdField.getPassword());
+                        if (!badgeId.isEmpty()) {
+                            Integer idEmployee = check.searchEmployeeByBadgeId(badgeId);
+                            if (idEmployee != 0) {
+                                Boolean hasTag = check.hasTag(idEmployee, "Fingerprint Register");
+                                if (hasTag) {
+                                    FrmLectorRegister obj = new FrmLectorRegister();
+                                    obj.setVisible(true);
+                                    this.setVisible(false);
+                                    badgeIdField.setText(null);
+                                    stringNumber = "";
+                                } else {
+                                    sendText("You don't have the 'Fingerprint Register' Tag", Color.RED, 25);
+                                    badgeIdField.setText(null);
+                                    stringNumber = "";
+                                }
                             } else {
-                                sendText("You don't have the 'Fingerprint Register' Tag", Color.RED, 25);
+                                sendText("The Badge ID was not found", Color.RED, 25);
                                 badgeIdField.setText(null);
                                 stringNumber = "";
                             }
                         } else {
-                            sendText("The Badge ID was not found", Color.RED, 25);
-                            badgeIdField.setText(null);
-                            stringNumber = "";
+                            sendText("The Badge ID is Empty", Color.RED, 25);
                         }
                     } else {
-                        sendText("The Badge ID is Empty", Color.RED, 25);
+                        sendText("The employee doesn't have the 'Fingerprint' Tag. ", Color.RED, 25);
+                        badgeIdField.setText(null);
+                        stringNumber = "";
                     }
-                } else {
-                    sendText("The employee doesn't have the 'Fingerprint' Tag. ", Color.RED, 25);
-                    badgeIdField.setText(null);
-                    stringNumber = "";
                 }
+            } else {
+                sendText("The employee with the 'ID Number' " + identification + " given doesn't exist", Color.BLUE, 15);
             }
+
         }
 
     }//GEN-LAST:event_btnCheckActionPerformed
@@ -537,11 +584,11 @@ public class FrmRegistValidate extends javax.swing.JFrame {
         if (activeField.equals("badgeIdField")) {
             field = badgeIdField;
         }
-        
+
         if (!field.getText().isEmpty()) {
             field.setText("" + field.getText().substring(0, field.getText().length() - 1));
         }
-        
+
         if (activeField.equals("idNumberField")) {
             stringNumber = idNumberField.getText();
         }

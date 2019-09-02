@@ -141,20 +141,23 @@ public class check {
      * @param identification
      * @return List
      */
-    public Map searchEmployeeByIdentificationId(String identification) {
+    public List searchEmployeeByIdentificationId(String identification) {
         OdooXmlRpc odoo = this.connection();
         List AllFilters = new ArrayList<>();
         AllFilters.add(asList("identification_id", "=", identification));
 
         List employee = odoo.getRecords("hr.employee",
                 asList("id", "name"), AllFilters);
+            System.out.println(employee);
+            System.out.println(employee);
+            System.out.println(employee);
 
-        if (!employee.isEmpty()) {
-            HashMap emp = (HashMap) employee.get(0);
-            return emp;
-        }
+//        if (!employee.isEmpty()) {
+//            HashMap emp = (HashMap) employee.get(0);
+//            return emp;
+//        }
 
-        return null;
+        return employee;
     }
 
     /**

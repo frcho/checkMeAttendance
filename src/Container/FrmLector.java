@@ -29,7 +29,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-import static java.util.Arrays.asList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;

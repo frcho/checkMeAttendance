@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class FrmAlter extends javax.swing.JFrame {
 
@@ -475,7 +474,7 @@ public class FrmAlter extends javax.swing.JFrame {
                         stringNumber = "";
 
                     } else {
-                        sendTextInOut("You don't have the 'Manual Fingerprint' Tag", Color.RED, 15);
+                        sendTextInOut("You don't have the 'Manual Attendance' Tag", Color.RED, 15);
                         badgeIdField.setText(null);
                         lblWorkingHour.setText(null);
                         stringNumber = "";
