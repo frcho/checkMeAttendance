@@ -1,0 +1,4 @@
+odoo.host=http://localhost:8069
+odoo.database=odoo
+odoo.user=info@example.com
+odoo.password=aaa

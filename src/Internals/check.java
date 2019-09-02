@@ -2,11 +2,16 @@ package Internals;
 
 import Logging.OdooXmlRpc;
 import Utils.Util;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  *
@@ -20,8 +25,28 @@ public class check {
      * @return boolean
      */
     public OdooXmlRpc connection() {
-        OdooXmlRpc odoo = new OdooXmlRpc();                
-        odoo.login("http://localhost:8069", "odoo", "info@example.com", "aaa");
+        String properiesPath = "C:\\Program Files\\Attendance\\config.properties";
+
+        OdooXmlRpc odoo = new OdooXmlRpc();
+
+        File tmpDir = new File(properiesPath);
+            boolean exists = tmpDir.exists();
+            
+        if (exists) {
+            try (InputStream input = new FileInputStream(properiesPath)) {
+
+                Properties prop = new Properties();
+                // load a properties file
+                prop.load(input);
+
+                odoo.login(prop.getProperty("odoo.host"), prop.getProperty("odoo.database"), prop.getProperty("odoo.user"), prop.getProperty("odoo.password"));
+
+            } catch (IOException io) {
+            }
+
+        } else {
+            odoo.login("http://localhost:8069", "odoo", "info@example.com", "aaa");
+        }
         return odoo;
     }
 
@@ -148,15 +173,14 @@ public class check {
 
         List employee = odoo.getRecords("hr.employee",
                 asList("id", "name"), AllFilters);
-            System.out.println(employee);
-            System.out.println(employee);
-            System.out.println(employee);
+        System.out.println(employee);
+        System.out.println(employee);
+        System.out.println(employee);
 
 //        if (!employee.isEmpty()) {
 //            HashMap emp = (HashMap) employee.get(0);
 //            return emp;
 //        }
-
         return employee;
     }
 

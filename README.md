@@ -37,3 +37,21 @@ This Tags must be assigne to each user for use the aplication, you would deside 
  - Manual Attendance: Tag that allows to user to use the code Badge ID for check in.
  - Fingerprint Register: Tag that allows to chosse which user will have the ability for register fingerprint.
  - Fingerprint: Tag that allows a user to be listed for fingerprint register.
+
+## Optional config.properties file
+if you want to used the parameter for connect with odoo host using a file, you can use config.properties.dist 
+The location of this file is the root of the project
+
+You need to  create a directory with name **Attendance** in directory **C:\Program Files**
+Then copy and paste config.properties.dist and change the name to config.properties
+Open de file and put your connetion data.
+
+If you do not want to use this file, by default the application use: 
+
+- odoo.host=http://localhost:8069
+- odoo.database=odoo
+- odoo.user=info@example.com
+- odoo.password=aaa
+
+
+
