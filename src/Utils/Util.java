@@ -3,6 +3,8 @@ package Utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -76,8 +78,8 @@ public class Util {
 
         return devolver;
     }
-    
-        /**
+
+    /**
      * Method to get String dateTime
      *
      * @return String
@@ -93,5 +95,22 @@ public class Util {
         String DateUTC = dateFormat.format(date);
         return DateUTC;
 
+    }
+
+    public static Date getSomeDate(final String str, final TimeZone tz)
+            throws ParseException {
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        sdf.setTimeZone(tz);
+        return sdf.parse(str);
+    }
+
+    public static void main(String[] args) throws ParseException {
+       String string1 = "2009-10-10 12:12:12";
+        SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+        sdf.setTimeZone(TimeZone.getTimeZone("America/Chicago"));
+        Date date = sdf.parse(string1);
+//        System.out.println(sdf.format(getSomeDate(
+//                "2010-11-17 01:12:00", TimeZone.getTimeZone("Europe/Berlin"))));
+//        System.out.println(date);
     }
 }
