@@ -18,7 +18,7 @@ public class reloj extends Thread{
     public void run(){
         while(true){
             Date ahora = new Date();
-            SimpleDateFormat formato = new SimpleDateFormat("hh:mm:ss");
+            SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss");
             lbl.setText(formato.format(ahora));
             try{
                 sleep(1000);

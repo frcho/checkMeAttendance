@@ -3,8 +3,6 @@ package Utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -15,12 +13,15 @@ import java.util.TimeZone;
  */
 public class Util {
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT_Z = "yyyy-MM-dd HH:mm:ss z";
+
     public static String DifferenceBetweenDates(String vinicio, String vfinal) {
 
         Date dinicio = null, dfinal = null;
         long milis1, milis2, diff;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
         try {
             // PARSEO STRING A DATE
@@ -89,7 +90,7 @@ public class Util {
         Date dat = new Date();
         java.sql.Date date = new java.sql.Date(dat.getTime());
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         String DateUTC = dateFormat.format(date);
@@ -97,20 +98,38 @@ public class Util {
 
     }
 
-    public static Date getSomeDate(final String str, final TimeZone tz)
-            throws ParseException {
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
-        sdf.setTimeZone(tz);
-        return sdf.parse(str);
+    /**
+     * Method to get String dateTime
+     *
+     * @return String
+     */
+    public static String dateFormatWithTimezone() {
+
+        Date dat = new Date();
+        java.sql.Date date = new java.sql.Date(dat.getTime());
+
+        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        String DateUTC = dateFormat.format(date);
+        return DateUTC;
+
     }
 
-    public static void main(String[] args) throws ParseException {
-       String string1 = "2009-10-10 12:12:12";
-        SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
-        sdf.setTimeZone(TimeZone.getTimeZone("America/Chicago"));
-        Date date = sdf.parse(string1);
-//        System.out.println(sdf.format(getSomeDate(
-//                "2010-11-17 01:12:00", TimeZone.getTimeZone("Europe/Berlin"))));
-//        System.out.println(date);
+    /**
+     * 
+     * Method to get Current dateTime by default timezone 
+     * @param stamp string date with format yyyy-MM-dd HH:mm:ss
+     * @return String datetime
+     * @throws ParseException 
+     */
+    public static String getCurrentTime(String stamp) throws ParseException {
+
+        SimpleDateFormat dfZone = new SimpleDateFormat(DATE_FORMAT_Z);
+        Date dZulu = dfZone.parse(stamp + " UTC");
+
+        dfZone.setTimeZone(TimeZone.getDefault());
+
+        return new SimpleDateFormat(DATE_FORMAT).format(dZulu);
     }
 }

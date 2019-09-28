@@ -8,9 +8,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -464,8 +467,13 @@ public class FrmAlter extends javax.swing.JFrame {
 
                                 sendTextInOut(name, Color.ORANGE, 30);
                             } else {
-                                String checkIn = (String) attendance.get("check_in");
-                                sendHour(checkIn, 1);
+                                String checkIn;
+                                try {
+                                    checkIn = Util.getCurrentTime((String) attendance.get("check_in"));
+                                    sendHour(checkIn, 1);
+                                } catch (ParseException ex) {
+                                    Logger.getLogger(FrmAlter.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 sendTextInOut(name, Color.GREEN, 30);
                             }
 
