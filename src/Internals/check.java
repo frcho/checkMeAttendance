@@ -25,7 +25,7 @@ public class check {
      * @return boolean
      */
     public OdooXmlRpc connection() {
-        String properiesPath = "C:\\Program Files\\Attendance\\config.properties";
+        String properiesPath = "C:\\Attendance\\config.properties";
 
         OdooXmlRpc odoo = new OdooXmlRpc();
 
