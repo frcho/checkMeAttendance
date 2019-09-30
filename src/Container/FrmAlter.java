@@ -360,7 +360,7 @@ public class FrmAlter extends javax.swing.JFrame {
         jPanel1.add(btnCheck);
         btnCheck.setBounds(430, 450, 79, 29);
 
-        employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        employeeName.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(employeeName);
         employeeName.setBounds(160, 130, 450, 60);
@@ -526,7 +526,7 @@ public class FrmAlter extends javax.swing.JFrame {
      * @param fontSize Size font
      */
     public void sendTextInOut(String string, Color color, Integer fontSize) {
-        employeeName.setFont(new java.awt.Font("Tahoma", 0, fontSize));
+        employeeName.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, fontSize));
         employeeName.setForeground(color);
         employeeName.setText(string);
     }

@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +78,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void dataAcquired(final DPFPDataEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The fingerprint has been captured");
+                        EnviarTexto("The fingerprint has been captured", Color.BLACK);
                         ProcesarCaptura(e.getSample());
                     }
                 });
@@ -90,7 +91,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void readerConnected(final DPFPReaderStatusEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The fingerprint reader is activated");
+                        EnviarTexto("The fingerprint reader is activated", Color.BLACK);
                     }
                 });
             }
@@ -100,7 +101,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void readerDisconnected(final DPFPReaderStatusEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The fingerprint reader is not available");
+                        EnviarTexto("The fingerprint reader is not available", Color.BLACK);
                     }
                 });
             }
@@ -112,7 +113,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void fingerTouched(final DPFPSensorEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The finger has been placed");
+                        EnviarTexto("The finger has been placed", Color.BLACK);
                     }
                 });
             }
@@ -122,11 +123,13 @@ public class FrmLector extends javax.swing.JFrame {
             public void fingerGone(final DPFPSensorEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The finger has been removed");
+                        EnviarTexto("The finger has been removed", Color.BLACK);
                         try {
                             identificarHuella();
                             Reclutador.clear();
                         } catch (IOException ex) {
+                            Logger.getLogger(FrmLector.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ParseException ex) {
                             Logger.getLogger(FrmLector.class.getName()).log(Level.SEVERE, null, ex);
                         } finally {
 //                            lblImagenHuella.setIcon(null);
@@ -140,7 +143,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void errorReader(final DPFPErrorEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("Error: " + e.getError());
+                        EnviarTexto("Error: " + e.getError(), Color.BLACK);
                     }
                 });
             }
@@ -173,19 +176,24 @@ public class FrmLector extends javax.swing.JFrame {
         //EnviarTexto("Muestra de Huellas Necesarias para Guardar la Huella. Template "+ Reclutador.getFeaturesNeeded());
     }
 
-    public void EnviarTexto(String string) {
-        //txtArea.append(string + "\n");
+//    public void EnviarTexto(String string) {
+//        //txtArea.append(string + "\n");
+//        lblStatus.setText(string);
+//    }
+    public void EnviarTexto(String string, Color color) {
+//        employeeName.setFont(new java.awt.Font("Tahoma", 0, fontSize));
+        lblStatus.setForeground(color);
         lblStatus.setText(string);
     }
 
     public void start() {
         Lector.startCapture();
-        EnviarTexto("Fingerprint reader is being used");
+        EnviarTexto("Fingerprint reader is being used", Color.BLACK);
     }
 
     public void stop() {
         Lector.stopCapture();
-        EnviarTexto("Fingerprint reader is not being used");
+        EnviarTexto("Fingerprint reader is not being used", Color.BLACK);
     }
 
     public DPFPTemplate getTemplate() {
@@ -224,7 +232,7 @@ public class FrmLector extends javax.swing.JFrame {
                     case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
                         stop();
                         setTemplate(Reclutador.getTemplate());
-                        EnviarTexto("The fingerprint has been created, now you can save it");
+                        EnviarTexto("The fingerprint has been created, now you can save it", Color.BLACK);
                         break;
                     case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
                         Reclutador.clear();
@@ -241,7 +249,7 @@ public class FrmLector extends javax.swing.JFrame {
 
     public static int usuario;
 
-    public void identificarHuella() throws IOException {
+    public void identificarHuella() throws IOException, ParseException {
 
         if (featuresverificacion != null) {
             check check = new check();
@@ -275,12 +283,14 @@ public class FrmLector extends javax.swing.JFrame {
                 i++;
             }
             //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
-            JOptionPane.showMessageDialog(null, "No existe ningún registro que coincida con la huella", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "No existe ningún registro que coincida con la huella", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
+            EnviarTexto("It doesn't exist a regist that match with the fingerprint", Color.RED);
+
             setTemplate(null);
         } else {
             //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
 //            JOptionPane.showMessageDialog(null, "Something happend with device, Maybe Its broken, Try with other", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
-            EnviarTexto("Something happend with device, Maybe Its broken, Try with other device");
+            EnviarTexto("Something happend with device, Maybe Its broken, Try with other device", Color.BLACK);
             setTemplate(null);
         }
     }
@@ -295,6 +305,7 @@ public class FrmLector extends javax.swing.JFrame {
         employeeName.setForeground(Color.orange);
         employeeName.setText(string);
         if (status == 1) {
+//            employeeName.setFont(new java.awt.Font("Tahoma", 0, 35));
             employeeName.setForeground(Color.GREEN);
             employeeName.setText(string);
         }
@@ -311,7 +322,7 @@ public class FrmLector extends javax.swing.JFrame {
         }
     }
 
-    public void registerAttendee(String name, Integer id) {
+    public void registerAttendee(String name, Integer id) throws ParseException {
         check check = new check();
         Map attendance = check.checkinOut(id);
 
@@ -324,7 +335,7 @@ public class FrmLector extends javax.swing.JFrame {
             sendHour(calculateWorkedTime, 0);
             sendTextInOut(name, 0);
         } else {
-            String checkIn = (String) attendance.get("check_in");
+            String checkIn = Util.getCurrentTime((String) attendance.get("check_in"));
             sendHour(checkIn, 1);
             sendTextInOut(name, 1);
         }
@@ -364,7 +375,7 @@ public class FrmLector extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CheckMeIn");
 
-        employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
+        employeeName.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblHora.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
