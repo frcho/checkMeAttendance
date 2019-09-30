@@ -166,7 +166,7 @@ public class FrmContainer extends javax.swing.JFrame {
         menuBar2.add(mnuInicio2);
 
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Ayuda");
+        helpMenu.setText("Help");
         helpMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/under_computer-26.png"))); // NOI18N

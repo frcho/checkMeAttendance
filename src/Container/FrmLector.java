@@ -367,8 +367,6 @@ public class FrmLector extends javax.swing.JFrame {
         employeeName.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
         employeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblImagenHuella.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-
         lblHora.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
 
         lblStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
@@ -381,7 +379,6 @@ public class FrmLector extends javax.swing.JFrame {
 
         lblHora2.setFont(new java.awt.Font("Segoe UI Light", 1, 80)); // NOI18N
         lblHora2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHora2.setText("00:00");
 
         btnChange.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnChange.setForeground(new java.awt.Color(255, 255, 255));
