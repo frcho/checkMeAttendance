@@ -113,6 +113,7 @@ public class FrmLector extends javax.swing.JFrame {
             public void fingerTouched(final DPFPSensorEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
+//                         sendTextInOut('AAA', 1);
                         EnviarTexto("The finger has been placed", Color.BLACK);
                     }
                 });
@@ -226,7 +227,7 @@ public class FrmLector extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex);
 //                System.err.println("Error: "+ex.getMessage());
             } finally {
-                EstadoHuellas();
+//                EstadoHuellas();
                 // Comprueba si la plantilla se ha creado.
                 switch (Reclutador.getTemplateStatus()) {
                     case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
@@ -237,7 +238,7 @@ public class FrmLector extends javax.swing.JFrame {
                     case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
                         Reclutador.clear();
                         stop();
-                        EstadoHuellas();
+//                        EstadoHuellas();
                         setTemplate(null);
                         JOptionPane.showMessageDialog(FrmLector.this, "The fingerprint cannot been created", "CheckMeIn - Fingerprint Template System", JOptionPane.ERROR_MESSAGE);
                         start();
@@ -250,7 +251,7 @@ public class FrmLector extends javax.swing.JFrame {
     public static int usuario;
 
     public void identificarHuella() throws IOException, ParseException {
-
+        
         if (featuresverificacion != null) {
             check check = new check();
             List employeList = check.allEmployeeWithFingerprint();
@@ -271,12 +272,17 @@ public class FrmLector extends javax.swing.JFrame {
                     setTemplate(referenceTemplate);
                     // Compara las caracteriticas de la huella recientemente capturda con la
                     // alguna plantilla guardada en la base de datos que coincide con ese tipo
+                    Verificador.setFARRequested(DPFPVerification.HIGH_SECURITY_FAR);
                     DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
                     //compara las plantilas (actual vs bd)
                     //Si encuentra correspondencia dibuja el mapa
                     //e indica el nombre de la persona que coincidió.
                     if (result.isVerified()) {
+ 
+                        System.out.printf("Matching finger: %s, FAR achieved: %g.\n",
+                                name, (double) result.getFalseAcceptRate() / DPFPVerification.PROBABILITY_ONE);
                         registerAttendee(name, id);
+                        setTemplate(null);
                         return;
                     }
                 }
@@ -285,7 +291,6 @@ public class FrmLector extends javax.swing.JFrame {
             //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
 //            JOptionPane.showMessageDialog(null, "No existe ningún registro que coincida con la huella", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
             EnviarTexto("It doesn't exist a regist that match with the fingerprint", Color.RED);
-
             setTemplate(null);
         } else {
             //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
@@ -508,7 +513,7 @@ public class FrmLector extends javax.swing.JFrame {
         FrmAlter.setLocationRelativeTo(null);
 
         FrmAlter.setVisible(true);
-        dispose(); 
+        dispose();
     }//GEN-LAST:event_btnChangeActionPerformed
 
     public static void main(String args[]) {

@@ -88,7 +88,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
             public void dataAcquired(final DPFPDataEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The fingerprint has been captured");
+                        EnviarTexto("The fingerprint has been captured");                                           
                         ProcesarCaptura(e.getSample());
                     }
                 });
@@ -222,6 +222,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex);
             } finally {
                 EstadoHuellas();
+                System.out.println(Reclutador.getTemplateStatus());
                 // Comprueba si la plantilla se ha creado.
                 switch (Reclutador.getTemplateStatus()) {
                     case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
