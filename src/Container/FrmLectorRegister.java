@@ -88,7 +88,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
             public void dataAcquired(final DPFPDataEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        EnviarTexto("The fingerprint has been captured");                                           
+                        EnviarTexto("The fingerprint has been captured");
                         ProcesarCaptura(e.getSample());
                     }
                 });
@@ -252,10 +252,11 @@ public class FrmLectorRegister extends javax.swing.JFrame {
 
         //Obtiene los datos del template de la huella actual
         ByteArrayInputStream fingerprintData = new ByteArrayInputStream(template.serialize());
-//        Integer fingerprintSize = template.serialize().length;
+        Integer fingerprintSize = template.serialize().length;
+//        System.out.println("Base 64 Decoded  String : " + new String(decoded));
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         int nRead;
-        byte[] info = new byte[1024];
+        byte[] info = new byte[fingerprintSize];
         while ((nRead = fingerprintData.read(info, 0, info.length)) != -1) {
             buffer.write(info, 0, nRead);
         }
@@ -284,8 +285,7 @@ public class FrmLectorRegister extends javax.swing.JFrame {
 //                data.put("x_fingerprint", "Genial");
                 data.put("x_fingerprint", fingerDataEncode);
                 check.addFingerprintToEmployee(id, data);
-                
-                
+
                 lblNumberOfAttempts.setText("4");
                 btnSave.setEnabled(false);
                 sendText("Fingerprint Saved", Color.GREEN);
@@ -440,7 +440,8 @@ public class FrmLectorRegister extends javax.swing.JFrame {
         try {
             fingerPrintSave();
         } catch (IOException ex) {
-            Logger.getLogger(FrmLectorRegister.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmLectorRegister.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         Reclutador.clear();
         lblImagenHuella.setIcon(null);
@@ -461,13 +462,17 @@ public class FrmLectorRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmLectorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLectorRegister.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
